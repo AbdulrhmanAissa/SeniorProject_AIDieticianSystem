@@ -639,78 +639,70 @@
                     </div>
 
                       <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                      <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                        <input name="email" type="text" class="form-control" id="email" value="">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                      <label for="height" class="col-md-4 col-lg-3 col-form-label">Height</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
+                        <input name="height" type="number" class="form-control" id="height" value="">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                      <label for="weight" class="col-md-4 col-lg-3 col-form-label">Weight</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
+                        <input name="weight" type="number" class="form-control" id="weight" value="">
                       </div>
                     </div>
 
-                    <div class="row mb-3">
-                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                    <div class="col-12">
+                      <label for="activityLevel" class="form-label">Activity Level</label>
+                      <select class="form-select" id="activityLevel" name="activityLevel" required>
+                          <option value="" selected disabled>Select your activity level</option>
+                          <option value="sedentary">Sedentary</option>
+                          <option value="moderate">Moderate</option>
+                          <option value="active">Active</option>
+                      </select>
+                      <div class="invalid-feedback">Please select your activity level!</div>
+                  </div>
+          
+                  <div class="col-12">
+                      <label for="allergies" class="form-label">Allergies (if any)</label>
+                      <input type="text" name="allergies" class="form-control" id="allergies">
+                  </div>
+          
+                  <div class="col-12">
+                      <label for="dietaryPreferences" class="form-label">Dietary Preferences</label>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian">
+                          <label class="form-check-label" for="vegetarian">Vegetarian</label>
                       </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="vegan" id="vegan">
+                          <label class="form-check-label" for="vegan">Vegan</label>
                       </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="glutenFree" id="glutenFree">
+                          <label class="form-check-label" for="glutenFree">Gluten-Free</label>
                       </div>
-                    </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
+                  <div class="col-12">
+                    <label for="healthGoal" class="form-label">Health Goal</label>
+                    <select class="form-select" id="healthGoal" name="healthGoal" required>
+                        <option value="" selected disabled>Select your health goal</option>
+                        <option value="weightLoss">Weight Loss</option>
+                        <option value="muscleGain">Muscle Gain</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
                   </form><!-- End Profile Edit Form -->
 
                 </div>
@@ -728,13 +720,8 @@
                           <label class="form-check-label" for="changesMade">
                             Changes made to your account
                           </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new products and services
-                          </label>
-                        </div>
+                        </div>                                            
+
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="proOffers">
                           <label class="form-check-label" for="proOffers">
@@ -805,12 +792,7 @@
     <div class="copyright">
       &copy; Copyright <strong><span>AI_DieticianSystem</span></strong>. All Rights Reserved
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    
     </div>
   </footer><!-- End Footer -->
 
