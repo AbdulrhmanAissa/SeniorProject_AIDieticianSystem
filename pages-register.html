@@ -75,12 +75,30 @@
                       <label for="yourEmail" class="form-label">Your Email</label>
                       <input type="email" name="email" class="form-control" id="yourEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                    </div>               
+                    </div>
+
+                    <div class="col-12">
+                      <label for="gender" class="form-label">Gender</label>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                          <label class="form-check-label" for="male">Male</label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                          <label class="form-check-label" for="female">Female</label>
+                      </div>
+                      </div>
 
                     <div class="col-12">
                       <label for="yourAge" class="form-label">Your Age</label>
-                      <input type="number" name="age" class="form-control" id="yourAge" required>
+                      <input type="number" name="age" class="form-control" id="yourAge" min="1" max="120" required>
                       <div class="invalid-feedback">Please enter your age!</div>
+                    </div> 
+
+                    <div class="col-12">
+                      <label for="yourHight" class="form-label">Your Hight</label>
+                      <input type="number" name="hight" class="form-control" id="yourHight" required>
+                      <div class="invalid-feedback">Please enter your hight!</div>
                     </div> 
 
                     <div class="col-12">
