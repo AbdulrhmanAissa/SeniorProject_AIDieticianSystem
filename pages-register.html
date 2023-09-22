@@ -77,18 +77,7 @@
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
-                    <div class="col-12">
-                      <label for="gender" class="form-label">Gender</label>
-                      <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
-                          <label class="form-check-label" for="male">Male</label>
-                      </div>
-                      <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
-                          <label class="form-check-label" for="female">Female</label>
-                      </div>
-                      </div>
-
+                    
                     <div class="col-12">
                       <label for="yourAge" class="form-label">Your Age</label>
                       <input type="number" name="age" class="form-control" id="yourAge" min="1" max="120" required>
@@ -96,10 +85,51 @@
                     </div> 
 
                     <div class="col-12">
-                      <label for="yourHight" class="form-label">Your Hight</label>
-                      <input type="number" name="hight" class="form-control" id="yourHight" required>
-                      <div class="invalid-feedback">Please enter your hight!</div>
+                      <label for="yourgender" class="form-label">Your Gender</label>
+                      <select class="form-select" id="yourgender" name="yourgender" required>
+                          <option value="" selected disabled>Select your gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                      </select>
+                     </div>
+                  
+                    <div class="col-12">
+                      <label for="yourHeight" class="form-label">Your Height</label>
+                      <input type="number" name="hight" class="form-control" id="yourHeight" required>
+                      <div class="invalid-feedback">Please enter your height!</div>
                     </div> 
+
+                    <div class="col-12">
+                      <label for="activityLevel" class="form-label">Activity Level</label>
+                      <select class="form-select" id="activityLevel" name="activityLevel" required>
+                          <option value="" selected disabled>Select your activity level</option>
+                          <option value="sedentary">Sedentary</option>
+                          <option value="moderate">Moderate</option>
+                          <option value="active">Active</option>
+                      </select>
+                      <div class="invalid-feedback">Please select your activity level!</div>
+                  </div>
+          
+                  <div class="col-12">
+                      <label for="allergies" class="form-label">Allergies (if any)</label>
+                      <input type="text" name="allergies" class="form-control" id="allergies">
+                  </div>
+          
+                  <div class="col-12">
+                      <label for="dietaryPreferences" class="form-label">Dietary Preferences</label>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian">
+                          <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="vegan" id="vegan">
+                          <label class="form-check-label" for="vegan">Vegan</label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="glutenFree" id="glutenFree">
+                          <label class="form-check-label" for="glutenFree">Gluten-Free</label>
+                      </div>
+                  </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
