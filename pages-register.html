@@ -77,13 +77,6 @@
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
-                    
-                    <div class="col-12">
-                      <label for="yourAge" class="form-label">Your Age</label>
-                      <input type="number" name="age" class="form-control" id="yourAge" min="1" max="120" required>
-                      <div class="invalid-feedback">Please enter your age!</div>
-                    </div> 
-
                     <div class="col-12">
                       <label for="yourgender" class="form-label">Your Gender</label>
                       <select class="form-select" id="yourgender" name="yourgender" required>
@@ -93,10 +86,22 @@
                       </select>
                      </div>
                   
+                      <div class="col-12">
+                      <label for="yourAge" class="form-label">Your Age</label>
+                      <input type="number" name="age" class="form-control" id="yourAge" min="1" max="120" required>
+                      <div class="invalid-feedback">Please enter your age!</div>
+                    </div> 
+
                     <div class="col-12">
                       <label for="yourHeight" class="form-label">Your Height</label>
-                      <input type="number" name="hight" class="form-control" id="yourHeight" required>
+                      <input type="number" name="hight" class="form-control" id="yourHeight" min="1" required>
                       <div class="invalid-feedback">Please enter your height!</div>
+                    </div> 
+
+                    <div class="col-12">
+                      <label for="yourweight" class="form-label">Your Weight</label>
+                      <input type="number" name="wight" class="form-control" id="yourWeight" min="1" required>
+                      <div class="invalid-feedback">Please enter your weight!</div>
                     </div> 
 
                     <div class="col-12">
@@ -130,6 +135,16 @@
                           <label class="form-check-label" for="glutenFree">Gluten-Free</label>
                       </div>
                   </div>
+
+                  <div class="col-12">
+                    <label for="healthGoal" class="form-label">Health Goal</label>
+                    <select class="form-select" id="healthGoal" name="healthGoal" required>
+                        <option value="" selected disabled>Select your health goal</option>
+                        <option value="weightLoss">Weight Loss</option>
+                        <option value="muscleGain">Muscle Gain</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
