@@ -64,22 +64,22 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form method="post" action="/register" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
+                      <label for="name" class="form-label">Your Name</label>
+                      <input type="text" name="name" class="form-control" id="name" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
+                      <label for="email" class="form-label">Your Email</label>
+                      <input type="email" name="email" class="form-control" id="email" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourgender" class="form-label">Your Gender</label>
-                      <select class="form-select" id="yourgender" name="yourgender" required>
+                      <label for="gender" class="form-label">Your Gender</label>
+                      <select class="form-select" id="gender" name="gender" required>
                           <option value="" selected disabled>Select your gender</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
@@ -87,68 +87,68 @@
                      </div>
                   
                       <div class="col-12">
-                      <label for="yourAge" class="form-label">Your Age</label>
-                      <input type="number" name="age" class="form-control" id="yourAge" min="1" max="120" required>
+                      <label for="age" class="form-label">Your Age</label>
+                      <input type="number" name="age" class="form-control" id="age" min="18" max="100" required>
                       <div class="invalid-feedback">Please enter your age!</div>
                     </div> 
 
                     <div class="col-12">
-                      <label for="yourHeight" class="form-label">Your Height</label>
-                      <input type="number" name="hight" class="form-control" id="yourHeight" min="1" required>
+                      <label for="height" class="form-label">Your Height (cm)</label>
+                      <input type="number" name="height" class="form-control" id="height" min="120" required>
                       <div class="invalid-feedback">Please enter your height!</div>
                     </div> 
 
                     <div class="col-12">
-                      <label for="yourweight" class="form-label">Your Weight</label>
-                      <input type="number" name="wight" class="form-control" id="yourWeight" min="1" required>
+                      <label for="weight" class="form-label">Your Weight (kg)</label>
+                      <input type="number" name="weight" class="form-control" id="weight" min="30" required>
                       <div class="invalid-feedback">Please enter your weight!</div>
                     </div> 
 
                     <div class="col-12">
-                      <label for="activityLevel" class="form-label">Activity Level</label>
-                      <select class="form-select" id="activityLevel" name="activityLevel" required>
+                      <label for="activity" class="form-label">Activity Level</label>
+                      <select class="form-select" id="activity" name="activity" required>
                           <option value="" selected disabled>Select your activity level</option>
                           <option value="sedentary">Sedentary</option>
                           <option value="moderate">Moderate</option>
                           <option value="active">Active</option>
                       </select>
                       <div class="invalid-feedback">Please select your activity level!</div>
-                  </div>
+                    </div>
           
-                  <div class="col-12">
+                    <div class="col-12">
                       <label for="allergies" class="form-label">Allergies (if any)</label>
                       <input type="text" name="allergies" class="form-control" id="allergies">
-                  </div>
+                    </div>
           
-                  <div class="col-12">
-                      <label for="dietaryPreferences" class="form-label">Dietary Preferences</label>
+                    <div class="col-12">
+                      <label for="dietarypreferences" class="form-label">Dietary Preferences</label>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian">
+                          <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian" value="true">
                           <label class="form-check-label" for="vegetarian">Vegetarian</label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="vegan" id="vegan">
+                          <input class="form-check-input" type="checkbox" name="vegan" id="vegan" value="true">
                           <label class="form-check-label" for="vegan">Vegan</label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="glutenFree" id="glutenFree">
+                          <input class="form-check-input" type="checkbox" name="glutenFree" id="glutenFree" value="true">
                           <label class="form-check-label" for="glutenFree">Gluten-Free</label>
                       </div>
-                  </div>
+                    </div>
 
-                  <div class="col-12">
-                    <label for="healthGoal" class="form-label">Health Goal</label>
-                    <select class="form-select" id="healthGoal" name="healthGoal" required>
+                    <div class="col-12">
+                    <label for="healthgoal" class="form-label">Health Goal</label>
+                    <select class="form-select" id="healthgoal" name="healthgoal" required>
                         <option value="" selected disabled>Select your health goal</option>
                         <option value="weightLoss">Weight Loss</option>
                         <option value="muscleGain">Muscle Gain</option>
                         <option value="maintenance">Maintenance</option>
                     </select>
-                </div>
+                    </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="password" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
@@ -163,7 +163,7 @@
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                      <p class="small mb-0">Already have an account? <a href="/login">Log in</a></p>
                     </div>
                   </form>
 
