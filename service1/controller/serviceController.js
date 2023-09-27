@@ -91,24 +91,15 @@ const myprofiledata_get = async (req, res) => {
 
 const changepass_post = async (req, res) => {
    const { password, newpassword, renewpassword } = req.body;
-   console.log(password, newpassword, renewpassword);
    user = req.session.user;
 
    const isMatch = await bcrypt.compare(password, user.password);
 
    if(isMatch){
       if(newpassword === renewpassword){
-         const hasdPsw = await bcrypt.hash(newpassword, 12);
-         user.password = hasdPsw;
-         const email = user.email;
-         console.log(email);
-         const result = User.findOneAndUpdate({email: email },{password: hasdPsw},{ returnOriginal: false });
-         if (result.value) {
-            console.log('Record updated successfully');
-            console.log('Updated Record:', result.value);
-        } else {
-            console.log('No record found or update failed');
-        }
+         const newhasdPsw = await bcrypt.hash(newpassword, 12);
+         const result = await User.findOneAndUpdate({password: user.password},{password: newhasdPsw},{ returnOriginal: false });
+         res.redirect("/myprofile");
       }
    }
 };
