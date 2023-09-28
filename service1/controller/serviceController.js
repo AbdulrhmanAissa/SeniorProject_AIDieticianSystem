@@ -104,5 +104,39 @@ const changepass_post = async (req, res) => {
    }
 };
 
+const editprofile_post = async (req, res) => {
+   const {Name, email, height, 
+      weight, activityLevel, 
+      allergies, vegetarian, 
+      vegan, glutenFree, healthGoal} = req.body;
+   user = req.session.user;
+   
+   
+   if(Name.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{name: Name},{returnOriginal: false});}
+   if(email.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{email: email},{returnOriginal: false});}
+   if(height.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{height: height},{returnOriginal: false});}
+   if(weight.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{weight: weight},{returnOriginal: false});}
+   if(activityLevel.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{activity: activityLevel},{returnOriginal: false});}
+   if(allergies.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{allergies: allergies},{returnOriginal: false});}
+   if(vegetarian.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{vegetarian: true},{returnOriginal: false});}
+   if(vegan.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{vegan: true},{returnOriginal: false});}
+   if(glutenFree.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{glutenFree: true},{returnOriginal: false});}
+   if(healthGoal.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{healthgoal: healthGoal},{returnOriginal: false});}
 
-module.exports = { register_get, login_get, logout, register_post, login_post, myprofile_get, myprofiledata_get, changepass_post };
+   res.redirect("/myprofile");
+};
+
+
+module.exports = { register_get, login_get, logout,
+    register_post, login_post, myprofile_get,
+     myprofiledata_get, changepass_post, editprofile_post };

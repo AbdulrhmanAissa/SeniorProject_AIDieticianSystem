@@ -42,6 +42,7 @@ app.get("/myprofile/data",serviceController.myprofiledata_get);
 app.post("/login", serviceController.login_post);
 app.post("/register", serviceController.register_post);
 app.post("/changepass", serviceController.changepass_post);
+app.post("/editprofile", serviceController.editprofile_post);
 
 app.use((request, response) => {
     response.status(404).sendFile(path.join(__dirname, '../public/pages-error-404.html'));

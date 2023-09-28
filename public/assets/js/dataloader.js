@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const activityElement = document.getElementById("activityfield");
             const allergiesElement = document.getElementById("allergiesfield");
             const healthgoalElement = document.getElementById("healthgoalfield");
+            const dietaryPreferencesElement = document.getElementById("dietaryPreferencesfield");
 
 
             // Update the HTML elements with the user data
@@ -24,6 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
             activityElement.innerHTML = data.activity;
             allergiesElement.innerHTML = data.allergies;
             healthgoalElement.innerHTML = data.healthgoal;
+            if(data.vegetarian){dietaryPreferencesElement.textContent += " Vegetarian"};
+            if(data.vegan){dietaryPreferencesElement.textContent += " Vegan"};
+            if(data.glutenFree){dietaryPreferencesElement.textContent += " Gluten Free"};
+
         })
         .catch(error => console.error(error));
 });

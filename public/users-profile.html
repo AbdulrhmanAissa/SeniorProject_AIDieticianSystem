@@ -446,7 +446,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Dietary preferences </div>
-                    <div class="col-lg-9 col-md-8">XXX</div>
+                    <div class="col-lg-9 col-md-8" id="dietaryPreferencesfield"></div>
                   </div>
 
                   <div class="row">
@@ -459,8 +459,8 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
-                    <div class="row mb-3">
+                  <form method="post" action="/editprofile">
+                    <!-- <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
                         <img src="assets/img/profile-img.jpg" alt="Profile">
@@ -469,12 +469,12 @@
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="row mb-3">
                       <label for="Name" class="col-md-4 col-lg-3 col-form-label">Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="Name" type="text" class="form-control" id="Name" value="Kevin Anderson">
+                        <input name="Name" type="text" class="form-control" id="Name" value="">
                       </div>
                     </div>
 
@@ -518,15 +518,15 @@
                   <div class="col-12">
                       <label for="dietaryPreferences" class="form-label">Dietary Preferences</label>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian">
+                          <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian" value="vegetarian">
                           <label class="form-check-label" for="vegetarian">Vegetarian</label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="vegan" id="vegan">
+                          <input class="form-check-input" type="checkbox" name="vegan" id="vegan" value="vegan">
                           <label class="form-check-label" for="vegan">Vegan</label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="glutenFree" id="glutenFree">
+                          <input class="form-check-input" type="checkbox" name="glutenFree" id="glutenFree" value="glutenFree">
                           <label class="form-check-label" for="glutenFree">Gluten-Free</label>
                       </div>
                   </div>
@@ -539,10 +539,10 @@
                         <option value="muscleGain">Muscle Gain</option>
                         <option value="maintenance">Maintenance</option>
                     </select>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
                 </form><!-- End Profile Edit Form -->
 
                 </div>
