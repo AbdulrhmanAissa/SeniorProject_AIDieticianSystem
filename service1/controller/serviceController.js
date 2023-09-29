@@ -39,7 +39,7 @@ const register_post = async (req, res) => {
                    password: hasdPsw});
  
    await user.save();
-   res.redirect("/login");
+   res.redirect("/myprofile");
 };
 
 const login_get = (req, res) => {
@@ -98,7 +98,7 @@ const changepass_post = async (req, res) => {
    if(isMatch){
       if(newpassword === renewpassword){
          const newhasdPsw = await bcrypt.hash(newpassword, 12);
-         const result = await User.findOneAndUpdate({password: user.password},{password: newhasdPsw},{ returnOriginal: false });
+         await User.findOneAndUpdate({password: user.password},{password: newhasdPsw},{ returnOriginal: false });
          res.redirect("/myprofile");
       }
    }
@@ -123,13 +123,25 @@ const editprofile_post = async (req, res) => {
    if(activityLevel.length !== 0)
       {await User.findOneAndUpdate({_id: user._id},{activity: activityLevel},{returnOriginal: false});}
    if(allergies.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{allergies: allergies},{returnOriginal: false});}
-   if(vegetarian.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{vegetarian: true},{returnOriginal: false});}
-   if(vegan.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{vegan: true},{returnOriginal: false});}
-   if(glutenFree.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{glutenFree: true},{returnOriginal: false});}
+      {awaitUser.findOneAndUpdate({_id: user._id},{allergies: allergies},{returnOriginal: false});}
+   if(typeof vegetarian === "string")  
+      {if(vegetarian.length !== 0)
+         {await User.findOneAndUpdate({_id: user._id},{vegetarian: true},{returnOriginal: false});}}
+   else{
+      await User.findOneAndUpdate({_id: user._id},{vegetarian: false},{returnOriginal: false});
+   }
+   if(typeof vegan === "string")
+      {if(vegan.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{vegan: true},{returnOriginal: false});}}
+   else{
+      await User.findOneAndUpdate({_id: user._id},{vegan: false},{returnOriginal: false});
+   }
+   if(typeof glutenFree === "string")
+      {if(glutenFree.length !== 0)
+      {await User.findOneAndUpdate({_id: user._id},{glutenFree: true},{returnOriginal: false});}}
+   else{
+      await User.findOneAndUpdate({_id: user._id},{glutenFree: false},{returnOriginal: false});
+   }
    if(healthGoal.length !== 0)
       {await User.findOneAndUpdate({_id: user._id},{healthgoal: healthGoal},{returnOriginal: false});}
 
