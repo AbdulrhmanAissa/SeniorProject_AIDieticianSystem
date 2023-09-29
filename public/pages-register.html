@@ -67,7 +67,7 @@
                   <form method="post" action="/register" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="name" class="form-label">Your Name</label>
-                      <input type="text" name="name" class="form-control" id="name" required>
+                      <input type="text" name="name" class="form-control" id="name" pattern="[A-Za-z]" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
@@ -75,6 +75,12 @@
                       <label for="email" class="form-label">Your Email</label>
                       <input type="email" name="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                      <div class="invalid-feedback">Password must be 8 or more characters, at least one number, and one uppercase letter!</div>
                     </div>
 
                     <div class="col-12">
@@ -101,7 +107,7 @@
                     <div class="col-12">
                       <label for="weight" class="form-label">Your Weight (kg)</label>
                       <input type="number" name="weight" class="form-control" id="weight" min="30" required>
-                      <div class="invalid-feedback">Please enter your weight!</div>
+                      <div class="invalid-feedback">Please enter your weight! (Must be more than 30)</div>
                     </div> 
 
                     <div class="col-12">
@@ -144,12 +150,6 @@
                         <option value="muscleGain">Muscle Gain</option>
                         <option value="maintenance">Maintenance</option>
                     </select>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                      <div class="invalid-feedback">Password must be 8 or more, at least one number, and one uppercase letter!</div>
                     </div>
 
                     <div class="col-12">
