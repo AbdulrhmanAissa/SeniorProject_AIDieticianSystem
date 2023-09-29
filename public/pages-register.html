@@ -73,7 +73,7 @@
 
                     <div class="col-12">
                       <label for="email" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="email" required>
+                      <input type="email" name="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
@@ -148,8 +148,8 @@
 
                     <div class="col-12">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="password" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <input type="password" name="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                      <div class="invalid-feedback">Password must be 8 or more, at least one number, and one uppercase letter!</div>
                     </div>
 
                     <div class="col-12">
