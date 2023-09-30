@@ -39,6 +39,8 @@ const register_post = async (req, res) => {
                    password: hasdPsw});
  
    await user.save();
+   req.session.isAuth = true;
+   req.session.user = user;
    res.redirect("/myprofile");
 };
 
@@ -98,7 +100,9 @@ const changepass_post = async (req, res) => {
    if(isMatch){
       if(newpassword === renewpassword){
          const newhasdPsw = await bcrypt.hash(newpassword, 12);
-         await User.findOneAndUpdate({password: user.password},{password: newhasdPsw},{ returnOriginal: false });
+         const newuser = await User.findOneAndUpdate({password: user.password},{password: newhasdPsw},{ returnOriginal: false });
+         req.session.isAuth = true;
+         req.session.user = newuser;
          res.redirect("/myprofile");
       }
    }
