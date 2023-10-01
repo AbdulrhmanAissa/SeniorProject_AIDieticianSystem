@@ -10,6 +10,7 @@ const serviceController = require("./controller/serviceController");
 const isAuth = require("./middleware/isAuth");
 
 const app = express();
+app.set("view engine", "ejs");
 app.use(express.static('../public'));
 app.use(express.urlencoded({ extended: false }));
 
@@ -32,6 +33,9 @@ app.use(session({
 	store: sessionStore
 }));
 
+app.get("/", (req,res)=>{
+  res.render("charts-apexcharts");
+});
 
 app.get("/login", serviceController.login_get);
 app.get("/register", serviceController.register_get);
