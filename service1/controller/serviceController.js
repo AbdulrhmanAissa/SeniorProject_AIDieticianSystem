@@ -6,7 +6,7 @@ const User = require('../model/User');
 const register_get = (req, res) => {
    const error = req.session.error;
    req.session.error = undefined;
-   res.sendFile(path.join(__dirname, '../../public/pages-register.html'));
+   res.sendFile(path.join(__dirname, '../../public/pages-register.ejs'));
 };
 
 const register_post = async (req, res) => {
@@ -47,7 +47,7 @@ const register_post = async (req, res) => {
 const login_get = (req, res) => {
    const error = req.session.error;
    delete req.session.error;
-   res.sendFile(path.join(__dirname, '../../public/pages-login.html'));
+   res.sendFile(path.join(__dirname, '../../public/pages-login.ejs'));
 };
 
 const login_post = async (req, res) => {
@@ -83,7 +83,7 @@ const logout = (req, res) => {
 };
 
 const myprofile_get = async (req, res) => {
-   res.sendFile(path.join(__dirname, '../../public/users-profile.html'));
+   res.sendFile(path.join(__dirname, '../../public/users-profile.ejs'));
 };
 
 const myprofiledata_get = async (req, res) => {

@@ -49,7 +49,7 @@ app.post("/changepass", serviceController.changepass_post);
 app.post("/editprofile", serviceController.editprofile_post);
 
 app.use((request, response) => {
-    response.status(404).sendFile(path.join(__dirname, '../public/pages-error-404.html'));
+    response.status(404).sendFile(path.join(__dirname, '../public/pages-error-404.ejs'));
 });
 
 
