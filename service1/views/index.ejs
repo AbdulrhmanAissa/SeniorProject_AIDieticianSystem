@@ -1,12 +1,17 @@
- <% layout('layouts/boilerplate')%>
+<%- include("./partials/header.ejs") %>
 
+<body class="d-flex flex-column vh-100">
+
+  <%- include('./partials/navbar.ejs')%>
+
+  <%- include('./partials/sidebar.ejs')%>
   <main id="main" class="main">
 
     <div class="pagetitle">
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.ejs">Home</a></li>
+          <li class="breadcrumb-item"><a href="/Dashboard">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -342,9 +347,9 @@
     </section>
 
   </main><!-- End #main -->
-  
+  <%- include('./partials/footer.ejs')%>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+  <%- include('./partials/js.ejs')%>
 </body>
 
 </html>

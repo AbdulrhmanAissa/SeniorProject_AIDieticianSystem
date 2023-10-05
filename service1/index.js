@@ -11,7 +11,7 @@ const isAuth = require("./middleware/isAuth");
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(express.static('../public'));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 
 let sessionStore = new MongoDBStore({
@@ -33,8 +33,9 @@ app.use(session({
 	store: sessionStore
 }));
 
-app.get("/", (req,res)=>{
-  res.render("charts-apexcharts");
+app.get("/Dashboard", (req,res)=>{
+  user = req.session.user;
+  res.render("index",{user:user});
 });
 
 app.get("/login", serviceController.login_get);
@@ -49,9 +50,8 @@ app.post("/changepass", serviceController.changepass_post);
 app.post("/editprofile", serviceController.editprofile_post);
 
 app.use((request, response) => {
-    response.status(404).sendFile(path.join(__dirname, '../public/pages-error-404.ejs'));
+    response.status(404).render('pages-error-404');
 });
-
 
 mongoose.connect(process.env.MONGO_URI)
   .then((result) => { 

@@ -6,7 +6,7 @@ const User = require('../model/User');
 const register_get = (req, res) => {
    const error = req.session.error;
    req.session.error = undefined;
-   res.sendFile(path.join(__dirname, '../../public/pages-register.ejs'));
+   res.render('pages-register');
 };
 
 const register_post = async (req, res) => {
@@ -47,7 +47,7 @@ const register_post = async (req, res) => {
 const login_get = (req, res) => {
    const error = req.session.error;
    delete req.session.error;
-   res.sendFile(path.join(__dirname, '../../public/pages-login.ejs'));
+   res.render('pages-login');
 };
 
 const login_post = async (req, res) => {
@@ -83,7 +83,8 @@ const logout = (req, res) => {
 };
 
 const myprofile_get = async (req, res) => {
-   res.sendFile(path.join(__dirname, '../../public/users-profile.ejs'));
+   user = req.session.user;
+   res.render('users-profile',{ user: user });
 };
 
 const myprofiledata_get = async (req, res) => {
@@ -117,38 +118,39 @@ const editprofile_post = async (req, res) => {
    
    
    if(Name.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{name: Name},{returnOriginal: false});}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{name: Name},{returnOriginal: false});}
    if(email.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{email: email},{returnOriginal: false});}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{email: email},{returnOriginal: false});}
    if(height.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{height: height},{returnOriginal: false});}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{height: height},{returnOriginal: false});}
    if(weight.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{weight: weight},{returnOriginal: false});}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{weight: weight},{returnOriginal: false});}
    if(activityLevel.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{activity: activityLevel},{returnOriginal: false});}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{activity: activityLevel},{returnOriginal: false});}
    if(allergies.length !== 0)
-      {awaitUser.findOneAndUpdate({_id: user._id},{allergies: allergies},{returnOriginal: false});}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{allergies: allergies},{returnOriginal: false});}
    if(typeof vegetarian === "string")  
       {if(vegetarian.length !== 0)
-         {await User.findOneAndUpdate({_id: user._id},{vegetarian: true},{returnOriginal: false});}}
+         {newuser = await User.findOneAndUpdate({_id: user._id},{vegetarian: true},{returnOriginal: false});}}
    else{
-      await User.findOneAndUpdate({_id: user._id},{vegetarian: false},{returnOriginal: false});
+      newuser = await User.findOneAndUpdate({_id: user._id},{vegetarian: false},{returnOriginal: false});
    }
    if(typeof vegan === "string")
       {if(vegan.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{vegan: true},{returnOriginal: false});}}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{vegan: true},{returnOriginal: false});}}
    else{
-      await User.findOneAndUpdate({_id: user._id},{vegan: false},{returnOriginal: false});
+      newuser = await User.findOneAndUpdate({_id: user._id},{vegan: false},{returnOriginal: false});
    }
    if(typeof glutenFree === "string")
       {if(glutenFree.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{glutenFree: true},{returnOriginal: false});}}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{glutenFree: true},{returnOriginal: false});}}
    else{
-      await User.findOneAndUpdate({_id: user._id},{glutenFree: false},{returnOriginal: false});
+      newuser = await User.findOneAndUpdate({_id: user._id},{glutenFree: false},{returnOriginal: false});
    }
    if(healthGoal.length !== 0)
-      {await User.findOneAndUpdate({_id: user._id},{healthgoal: healthGoal},{returnOriginal: false});}
+      {newuser = await User.findOneAndUpdate({_id: user._id},{healthgoal: healthGoal},{returnOriginal: false});}
 
+   req.session.user = newuser;
    res.redirect("/myprofile");
 };
 
