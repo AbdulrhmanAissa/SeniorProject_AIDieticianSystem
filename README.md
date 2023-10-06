@@ -44,3 +44,9 @@ The project scope includes the following key components:
 
 ### User Story 10: Nutrition Education
 10. As a user, I want educational content on nutrition and healthy eating habits.
+
+
+# High-level System Architecture
+
+<img width="531" alt="HighLevel" src="https://github.com/AbdulrhmanAissa/SeniorProject_AIDieticianSystem/assets/89867584/dea2cb62-2771-4a55-8d8e-14df5193547c">
+
