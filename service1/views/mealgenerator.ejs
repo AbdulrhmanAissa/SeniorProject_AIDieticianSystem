@@ -1,0 +1,82 @@
+<%- include("./partials/header.ejs") %>
+
+<body class="d-flex flex-column vh-100">
+
+    <%- include('./partials/navbar.ejs')%>
+
+    <%- include('./partials/sidebar.ejs')%>
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+        <h1>AI Meal Generator</h1>
+        <nav>
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Dashboard">Home</a></li>
+            <li class="breadcrumb-item">Pages</li>
+            <li class="breadcrumb-item active">AI Meal Generator</li>
+            </ol>
+        </nav>
+        </div><!-- End Page Title -->
+        <section class="section faq">
+            <% if(user){ %>
+                <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Welcome <%= user.name %></h5>
+                        <!-- <p style="text-align: justify;">This is a place in which we can generate a meal plan that is customized to your needs.
+                             This meal plan will help you in reaching your health goal (<%= user.healthgoal %>).</p> -->
+
+                        <p style="text-align: justify;">Sticking to a meal plan is a valuable commitment that can have a profound impact on your overall health 
+                            and well-being. It serves as a roadmap for your daily nutritional intake, offering structure and 
+                            predictability to your eating habits. When you meticulously plan your meals, you gain the advantage 
+                            of being able to make informed choices about what you put into your body. This planning allows you 
+                            to ensure that you are getting a balanced mix of essential nutrients, including carbohydrates, 
+                            proteins, healthy fats, vitamins, and minerals, tailored to your specific dietary needs and goals.</p>
+
+                        <p style="text-align: justify;">One of the most significant benefits of adhering to a meal plan is its role in effective weight management. 
+                            By controlling portion sizes and calorie intake, you can better regulate your energy balance, which is 
+                            crucial for achieving and maintaining a healthy weight. A well-thought-out meal plan can help you avoid 
+                            overeating and reduce the likelihood of impulsive, less nutritious food choices, such as fast food or 
+                            sugary snacks. This, in turn, can contribute to better weight control and may help prevent obesity-related 
+                            health issues.</p>
+                                
+                        <p style="text-align: justify;">Furthermore, a meal plan can provide you with a sense of empowerment and control over your dietary choices. 
+                            It encourages mindful eating, fostering a deeper connection with the food you consume. As you follow your 
+                            plan, you become more attuned to the nutritional value of different foods, which can lead to improved 
+                            food choices and a greater appreciation for the impact of your diet on your health.</p>
+                                
+                        <p style="text-align: justify;">Over time, sticking to a meal plan can transform into a sustainable and healthy eating routine. It establishes 
+                            a consistent pattern of nourishment that becomes second nature, reducing the allure of unhealthy temptations. 
+                            This consistency can be especially helpful in managing conditions like diabetes, where blood sugar control 
+                            relies on a well-structured diet.</p>
+                                
+                        <p style="text-align: justify;">In summary, adhering to a meal plan is a powerful strategy for promoting a healthier lifestyle. It offers 
+                            a structured approach to nutrition, aids in weight management, encourages mindful eating, and ultimately 
+                            supports your long-term health and well-being. By committing to a well-balanced meal plan, you invest in 
+                            your present and future health, ensuring that your dietary choices align with your health goals and aspirations.</p>
+
+                             <h5 class="card-title" style="text-align: center;">AI Generated Meal Plan</h5>
+                        <div class="d-grid gap-2 mt-3">
+                            <button id="button" class="btn btn-primary" style="width: 40%; justify-self: center;">Generate Meal Plan</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>  
+                <script>
+                    const redirectButton = document.getElementById('button');
+
+                    redirectButton.addEventListener('click', function() {
+
+                        const newPageUrl = '/mealplan'; 
+                        window.location.href = newPageUrl;
+                    });
+                </script>
+            <% }; %>
+        </section>
+    </main><!-- End #main -->
+    <%- include('./partials/footer.ejs')%>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <%- include('./partials/js.ejs')%>
+</body>
+
+</html>

@@ -13,7 +13,8 @@ let userSchema = new mongoose.Schema({
   vegan: {type: Boolean},
   glutenFree: {type: Boolean},
   healthgoal: {type: String},
-  password: {type: String}
+  password: {type: String},
+  mealplan: {type: Object}
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,0 +1,422 @@
+<%- include("./partials/header.ejs") %>
+
+<body class="d-flex flex-column vh-100">
+
+    <%- include('./partials/navbar.ejs')%>
+
+    <%- include('./partials/sidebar.ejs')%>
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+        <h1>AI Meal Planner</h1>
+        <nav>
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Dashboard">Home</a></li>
+            <li class="breadcrumb-item">Pages</li>
+            <li class="breadcrumb-item active">AI Meal Planner</li>
+            </ol>
+        </nav>
+        </div><!-- End Page Title -->
+    <% if(mealplan) { %>
+        <section class="section faq">
+          <div class="row">
+            <div class="col-lg-4">
+            <div class="card basic">
+                <div class="card-body" style="text-align: center; max-height: 135px;">
+                    <h5 class="card-title"> <hr>Your Meal Plan <hr></h5>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Daily Macronutrients</h5>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingX">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseX" aria-expanded="false" aria-controls="flush-collapseX">
+                            Total Macros
+                          </button>
+                        </h2>
+                        <div id="flush-collapseX" class="accordion-collapse collapse" aria-labelledby="flush-headingX" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body"><div id="TotalMacroBarChart" style="min-height: 400px;" class="echart"></div></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card basic">
+                        <div class="card-body">
+                            <h5 class="card-title"><hr></h5>
+                                <h6>Breakfast</h6>
+                                    <p><%= mealplan.Breakfast %></p>
+                                    <h6>Snack One</h6>
+                                    <p><%= mealplan.SnackOne %></p>
+                                    <h6>Lunch</h6>
+                                    <p><%= mealplan.Lunch %></p>
+                                    <h6>Snack Two</h6>
+                                    <p><%= mealplan.SnackTwo %></p>
+                                    <h6>Dinner</h6>
+                                    <p><%= mealplan.Dinner %></p>
+                                    <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Macronutrients Per Meal</h5>
+        
+                      <!-- Accordion without outline borders -->
+                      <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                              Breakfast
+                            </button>
+                          </h2>
+                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"><div id="BreakfastBarChart" style="min-height: 400px;" class="echart"></div></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                              Snack One
+                            </button>
+                          </h2>
+                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"><div id="SnackOneBarChart" style="min-height: 400px;" class="echart"></div></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                              Lunch
+                            </button>
+                          </h2>
+                          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"><div id="LunchBarChart" style="min-height: 400px;" class="echart"></div></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                              Snack Two
+                            </button>
+                          </h2>
+                          <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"><div id="SnackTwoBarChart" style="min-height: 400px;" class="echart"></div></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                              Dinner
+                            </button>
+                          </h2>
+                          <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"><div id="DinnerBarChart" style="min-height: 400px;" class="echart"></div></div>
+                          </div>
+                        </div>
+                      </div>
+                      <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                          var totalFat = '<%= mealplan.Fat %>'
+                          var totalProtein = '<%= mealplan.Proteins %>'
+                          var totalCarbs = '<%= mealplan.Carbs %>'
+                          var totalCalories = '<%= mealplan.Calories %>'
+
+                          var breakfastFat = '<%= mealplan.BreakfastMacronutrients.Fat %>'
+                          var breakfastProtein = '<%= mealplan.BreakfastMacronutrients.Proteins %>'
+                          var breakfastCarbs = '<%= mealplan.BreakfastMacronutrients.Carbs %>'
+
+                          var snackOneFat = '<%= mealplan.SnackOneMacronutrients.Fat %>'
+                          var snackOneProtein = '<%= mealplan.SnackOneMacronutrients.Proteins %>'
+                          var snackOneCarbs = '<%= mealplan.SnackOneMacronutrients.Carbs %>'
+
+                          var LunchFat = '<%= mealplan.LunchMacronutrients.Fat %>'
+                          var LunchProtein = '<%= mealplan.LunchMacronutrients.Proteins %>'
+                          var LunchCarbs = '<%= mealplan.LunchMacronutrients.Carbs %>'
+
+                          var snackTwoFat = '<%= mealplan.SnackTwoMacronutrients.Fat %>'
+                          var snackTwoProtein = '<%= mealplan.SnackTwoMacronutrients.Proteins %>'
+                          var snackTwoCarbs = '<%= mealplan.SnackTwoMacronutrients.Carbs %>'
+
+                          var dinnerFat = '<%= mealplan.DinnerMacronutrients.Fat %>'
+                          var dinnerProtein = '<%= mealplan.DinnerMacronutrients.Proteins %>'
+                          var dinnerCarbs = '<%= mealplan.DinnerMacronutrients.Carbs %>'
+
+                          echarts.init(document.querySelector("#TotalMacroBarChart")).setOption({
+                            tooltip: {
+                              trigger: 'item'
+                            },
+                            legend: {
+                              top: '5%',
+                              left: 'center'
+                            },
+                            series: [{
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              label: {
+                                show: false,
+                                position: 'center'
+                              },
+                              emphasis: {
+                                label: {
+                                  show: true,
+                                  fontSize: '18',
+                                  fontWeight: 'bold'
+                                }
+                              },
+                              labelLine: {
+                                show: false
+                              },
+                              data: [{
+                                  value: totalProtein,
+                                  name: 'Protein'
+                                },
+                                {
+                                  value: totalCarbs,
+                                  name: 'Carbs'
+                                },
+                                {
+                                  value: totalFat,
+                                  name: 'Fat'
+                                },
+                                {
+                                  value: totalCalories,
+                                  name: 'Calories'
+                                }
+                              ]
+                            }]
+                          });
+                          echarts.init(document.querySelector("#BreakfastBarChart")).setOption({
+                            tooltip: {
+                              trigger: 'item'
+                            },
+                            legend: {
+                              top: '5%',
+                              left: 'center'
+                            },
+                            series: [{
+                              name: 'Amount in Grams',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              label: {
+                                show: false,
+                                position: 'center'
+                              },
+                              emphasis: {
+                                label: {
+                                  show: true,
+                                  fontSize: '18',
+                                  fontWeight: 'bold'
+                                }
+                              },
+                              labelLine: {
+                                show: false
+                              },
+                              data: [{
+                                  value: breakfastProtein,
+                                  name: 'Protein'
+                                },
+                                {
+                                  value: breakfastCarbs,
+                                  name: 'Carbs'
+                                },
+                                {
+                                  value: breakfastFat,
+                                  name: 'Fat'
+                                }
+                              ]
+                            }]
+                          });
+                          echarts.init(document.querySelector("#SnackOneBarChart")).setOption({
+                            tooltip: {
+                              trigger: 'item'
+                            },
+                            legend: {
+                              top: '5%',
+                              left: 'center'
+                            },
+                            series: [{
+                              name: 'Amount in Grams',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              label: {
+                                show: false,
+                                position: 'center'
+                              },
+                              emphasis: {
+                                label: {
+                                  show: true,
+                                  fontSize: '18',
+                                  fontWeight: 'bold'
+                                }
+                              },
+                              labelLine: {
+                                show: false
+                              },
+                              data: [{
+                                  value: snackOneProtein,
+                                  name: 'Protein'
+                                },
+                                {
+                                  value: snackOneCarbs,
+                                  name: 'Carbs'
+                                },
+                                {
+                                  value: snackOneFat,
+                                  name: 'Fat'
+                                }
+                              ]
+                            }]
+                          });
+                          echarts.init(document.querySelector("#LunchBarChart")).setOption({
+                            tooltip: {
+                              trigger: 'item'
+                            },
+                            legend: {
+                              top: '5%',
+                              left: 'center'
+                            },
+                            series: [{
+                              name: 'Amount in Grams',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              label: {
+                                show: false,
+                                position: 'center'
+                              },
+                              emphasis: {
+                                label: {
+                                  show: true,
+                                  fontSize: '18',
+                                  fontWeight: 'bold'
+                                }
+                              },
+                              labelLine: {
+                                show: false
+                              },
+                              data: [{
+                                  value: LunchProtein,
+                                  name: 'Protein'
+                                },
+                                {
+                                  value: LunchCarbs,
+                                  name: 'Carbs'
+                                },
+                                {
+                                  value: LunchFat,
+                                  name: 'Fat'
+                                }
+                              ]
+                            }]
+                          });
+                          echarts.init(document.querySelector("#SnackTwoBarChart")).setOption({
+                            tooltip: {
+                              trigger: 'item'
+                            },
+                            legend: {
+                              top: '5%',
+                              left: 'center'
+                            },
+                            series: [{
+                              name: 'Amount in Grams',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              label: {
+                                show: false,
+                                position: 'center'
+                              },
+                              emphasis: {
+                                label: {
+                                  show: true,
+                                  fontSize: '18',
+                                  fontWeight: 'bold'
+                                }
+                              },
+                              labelLine: {
+                                show: false
+                              },
+                              data: [{
+                                  value: snackTwoProtein,
+                                  name: 'Protein'
+                                },
+                                {
+                                  value: snackTwoCarbs,
+                                  name: 'Carbs'
+                                },
+                                {
+                                  value: snackTwoFat,
+                                  name: 'Fat'
+                                }
+                              ]
+                            }]
+                          });
+                          echarts.init(document.querySelector("#DinnerBarChart")).setOption({
+                            tooltip: {
+                              trigger: 'item'
+                            },
+                            legend: {
+                              top: '5%',
+                              left: 'center'
+                            },
+                            series: [{
+                              name: 'Amount in Grams',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              label: {
+                                show: false,
+                                position: 'center'
+                              },
+                              emphasis: {
+                                label: {
+                                  show: true,
+                                  fontSize: '18',
+                                  fontWeight: 'bold'
+                                }
+                              },
+                              labelLine: {
+                                show: false
+                              },
+                              data: [{
+                                  value: dinnerProtein,
+                                  name: 'Protein'
+                                },
+                                {
+                                  value: dinnerCarbs,
+                                  name: 'Carbs'
+                                },
+                                {
+                                  value: dinnerFat,
+                                  name: 'Fat'
+                                }
+                              ]
+                            }]
+                          });
+                        });
+                      </script>
+                    </div>
+                  </div>
+                </div>
+        </section>  
+    <%};%>
+    </main><!-- End #main -->
+    <%- include('./partials/footer.ejs')%>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <%- include('./partials/js.ejs')%>
+</body>
+
+</html>

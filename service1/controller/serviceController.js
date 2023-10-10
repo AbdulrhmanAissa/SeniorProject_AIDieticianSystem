@@ -1,7 +1,10 @@
 const bcrypt = require("bcryptjs");
-const path = require('path');
-
+const  OpenAIApi  = require('openai');
 const User = require('../model/User');
+
+const openai = new OpenAIApi.OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
 
 const register_get = (req, res) => {
    const error = req.session.error;
@@ -87,11 +90,6 @@ const myprofile_get = async (req, res) => {
    res.render('users-profile',{ user: user });
 };
 
-const myprofiledata_get = async (req, res) => {
-   user = req.session.user;
-   res.json(user);
-};
-
 const changepass_post = async (req, res) => {
    const { password, newpassword, renewpassword } = req.body;
    user = req.session.user;
@@ -154,7 +152,61 @@ const editprofile_post = async (req, res) => {
    res.redirect("/myprofile");
 };
 
+const mealplanner = async (req,res)=>{
+   try {
+   user = req.session.user;
+   if(user.mealplan !== undefined){
+      console.log(user.mealplan);
+      res.render('mealplanner',{mealplan: user.mealplan});
+   }else{
+
+      prompt = `Create a meal plan for a ${user.age} year old ${user.gender} who has 
+     a weight of ${user.weight}kg and a height of ${user.height}cm and an activity level of 
+     ${user.activity} and a health goal of ${user.healthgoal}.
+     `; 
+      
+      // if(user.vegetarian){prompt+=" They are a vegetarian."};
+      // if(user.vegan){prompt+="They are a vegan."};
+      // if(user.glutenFree){prompt+="They are Gluten Free"};
+      // if(typeof user.allergies === "string"){
+      //    if(allergies.length !== 0){prompt+=`They have the following allergies ${user.allergies}.`}};
+
+      prompt+="\n#######\n Provide the total macronutrients (Carbs,Proteins,Fat) in grams for each meal and snack along with the Calories (as numbers not string).\n#######\n Provide the response in JSON format with keys of Breakfast, BreakfastMacronutrients,SnackOne, SnackOneMacronutrients, Lunch, LunchMacronutrients, SnackTwo, SnackTwoMacronutrients, Dinner, DinnerMacronutrients, Proteins, Carbs, Fat, Calories."
+
+     const response = await openai.chat.completions.create({
+       model: "gpt-3.5-turbo",
+       messages: [{"role": "user", "content": prompt}],
+     });
+
+   var newmealplan = response.choices[0].message.content;
+   var newmealplan_json = JSON.parse(newmealplan);
+     newuser = await User.findOneAndUpdate({_id: user._id},{ $set:{mealplan: newmealplan_json}},{returnOriginal: false});
+     console.log(newuser);
+      req.session.user = newuser;
+      console.log(newmealplan_json);
+   res.render('mealplanner',{ mealplan: newmealplan_json });
+   }
+   } catch (error) {
+     console.log(error);
+     res.redirect("/myprofile");
+   }
+};
+
+const meal_generator = async (req,res) =>{
+   user = req.session.user;
+   if(user.mealplan !== undefined){
+      res.render('mealplanner',{mealplan: user.mealplan});
+   }
+   else{
+      res.render('mealgenerator',{user: user});
+   }
+};
+
+const faq = async (req,res) => {
+   res.render('pages-faq');
+};
+
 
 module.exports = { register_get, login_get, logout,
     register_post, login_post, myprofile_get,
-     myprofiledata_get, changepass_post, editprofile_post };
+      changepass_post, editprofile_post, mealplanner, faq, meal_generator };
