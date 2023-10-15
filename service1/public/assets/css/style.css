@@ -821,18 +821,28 @@ h6 {
 }
 
 .dashboard .sales-card .card-icon {
-  color: #4154f1;
-  background: #f6f6fe;
+  color: #ee6666;
+  background: #ee66662b;
 }
 
-.dashboard .revenue-card .card-icon {
-  color: #2eca6a;
-  background: #e0f8e9;
+.dashboard .protein-card .card-icon {
+  color: #5470c6;
+  background: #5470c62b;
+}
+
+.dashboard .fat-card .card-icon {
+  color: #fac858;
+  background: #fac7582c;
+}
+
+.dashboard .carb-card .card-icon {
+  color: #9edf80;
+  background: #9edf802a;
 }
 
 .dashboard .customers-card .card-icon {
-  color: #ff771d;
-  background: #ffecdf;
+  color: #5470c6;
+  background: #5470c623;
 }
 
 /* Activity */

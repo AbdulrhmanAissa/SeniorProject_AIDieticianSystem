@@ -87,6 +87,16 @@ const logout = (req, res) => {
 
 const myprofile_get = async (req, res) => {
    user = req.session.user;
+
+   weight = req.session.user.weight;
+   height = req.session.user.height;
+   age = req.session.user.age;
+   gender = req.session.user.gender;
+
+   const bmr = calculateHarrisBenedictBMR(weight, height, age, gender);
+
+   console.log(bmr);
+
    res.render('users-profile',{ user: user });
 };
 
@@ -159,11 +169,16 @@ const mealplanner = async (req,res)=>{
       console.log(user.mealplan);
       res.render('mealplanner',{mealplan: user.mealplan});
    }else{
+      weight = req.session.user.weight;
+      height = req.session.user.height;
+      age = req.session.user.age;
+      gender = req.session.user.gender;
+
+      const bmr = calculateHarrisBenedictBMR(weight, height, age, gender);
 
       prompt = `Create a meal plan for a ${user.age} year old ${user.gender} who has 
      a weight of ${user.weight}kg and a height of ${user.height}cm and an activity level of 
-     ${user.activity} and a health goal of ${user.healthgoal}.
-     `; 
+     ${user.activity} and a health goal of ${user.healthgoal}. BMR = ${bmr}`; 
       
       // if(user.vegetarian){prompt+=" They are a vegetarian."};
       // if(user.vegan){prompt+="They are a vegan."};
@@ -171,17 +186,17 @@ const mealplanner = async (req,res)=>{
       // if(typeof user.allergies === "string"){
       //    if(allergies.length !== 0){prompt+=`They have the following allergies ${user.allergies}.`}};
 
-      prompt+="\n#######\n Provide the total macronutrients (Carbs,Proteins,Fat) in grams for each meal and snack along with the Calories (as numbers not string).\n#######\n Provide the response in JSON format with keys of Breakfast, BreakfastMacronutrients,SnackOne, SnackOneMacronutrients, Lunch, LunchMacronutrients, SnackTwo, SnackTwoMacronutrients, Dinner, DinnerMacronutrients, Proteins, Carbs, Fat, Calories."
-
+      prompt+="\n#######\n Provide the total macronutrients as a JSON object(Carbs,Proteins,Fat) in grams for each meal and snack along with the Calories (as numbers not string).\n#######\n Provide the response in JSON format with keys of Breakfast, BreakfastMacronutrients,SnackOne, SnackOneMacronutrients, Lunch, LunchMacronutrients, SnackTwo, SnackTwoMacronutrients, Dinner, DinnerMacronutrients, Proteins, Carbs, Fat, Calories."
+      prompt+="\n#######\nThe response should follow this format:"
+      prompt+="{Breakfast: '',BreakfastMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },SnackOne: '',SnackOneMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },Lunch: '',LunchMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },SnackTwo: '',SnackTwoMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },Dinner: '',DinnerMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },Proteins: ,Carbs: ,Fat: ,Calories: }";
      const response = await openai.chat.completions.create({
        model: "gpt-3.5-turbo",
        messages: [{"role": "user", "content": prompt}],
      });
 
-   var newmealplan = response.choices[0].message.content;
-   var newmealplan_json = JSON.parse(newmealplan);
+   let newmealplan = response.choices[0].message.content;
+   let newmealplan_json = JSON.parse(newmealplan);
      newuser = await User.findOneAndUpdate({_id: user._id},{ $set:{mealplan: newmealplan_json}},{returnOriginal: false});
-     console.log(newuser);
       req.session.user = newuser;
       console.log(newmealplan_json);
    res.render('mealplanner',{ mealplan: newmealplan_json });
@@ -205,6 +220,38 @@ const meal_generator = async (req,res) =>{
 const faq = async (req,res) => {
    res.render('pages-faq');
 };
+
+function calculateHarrisBenedictBMR(weight, height, age, gender) {
+if (gender === "Male") {
+   // Harris-Benedict equation for men
+   return 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+} else {
+   // Harris-Benedict equation for women
+   return 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+}
+}
+
+function calculateHarrisBenedictTotalCalories(bmr, activityLevel) {
+// Activity levels:
+// 1. Sedentary (little or no exercise): BMR * 1.2
+// 2. Lightly active (light exercise or sports 1-3 days a week): BMR * 1.375
+// 3. Moderately active (moderate exercise or sports 3-5 days a week): BMR * 1.55
+// 4. Very active (hard exercise or sports 6-7 days a week): BMR * 1.725
+// 5. Super active (very hard exercise, physical job, or training twice a day): BMR * 1.9
+
+switch (activityLevel) {
+   case 1:
+      return bmr * 1.2;
+   case 3:
+      return bmr * 1.55;
+   case 5:
+      return bmr * 1.9;
+   default:
+      throw new Error('Invalid activity level. Choose a value between 1 and 5.');
+}
+}
+
+// const totalCalories = calculateHarrisBenedictTotalCalories(bmr, activityLevel);
 
 
 module.exports = { register_get, login_get, logout,

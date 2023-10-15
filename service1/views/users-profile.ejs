@@ -50,73 +50,73 @@
               </ul>
               <div class="tab-content pt-2">
 
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                <div class="tab-pane fade show active profile-overview" id="profile-overview" style="text-align: center;">
                   
                   <p class="small fst-italic"></p>
 
                   <h5 class="card-title" style="text-align: center;">Profile Details</h5>
                   <% if(user) { %>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Name</div>
-                    <div class="col-lg-9 col-md-8" id="namefield"><%= user.name %></div>
+                    <div class="col-lg-4 col-md-5 label ">Name</div>
+                    <div class="col-lg-8 col-md-7" id="namefield"><%= user.name %></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8" id="emailfield"><%= user.email %></div>
+                    <div class="col-lg-4 col-md-5 label">Email</div>
+                    <div class="col-lg-8 col-md-7" id="emailfield"><%= user.email %></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Gender</div>
-                    <div class="col-lg-9 col-md-8" id="genderfield"><%= user.gender %></div>
+                    <div class="col-lg-4 col-md-5 label">Gender</div>
+                    <div class="col-lg-8 col-md-7" id="genderfield"><%= user.gender %></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Age</div>
-                    <div class="col-lg-9 col-md-8" id="agefield"><%= user.age %></div>
+                    <div class="col-lg-4 col-md-5 label">Age</div>
+                    <div class="col-lg-8 col-md-7" id="agefield"><%= user.age %></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Height</div>
-                    <div class="col-lg-9 col-md-8" id="heightfield"><%= user.height %></div>
+                    <div class="col-lg-4 col-md-5 label">Height</div>
+                    <div class="col-lg-8 col-md-7" id="heightfield"><%= user.height %></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Weight</div>
-                    <div class="col-lg-9 col-md-8" id="weightfield"><%= user.weight %></div>
+                    <div class="col-lg-4 col-md-5 label">Weight</div>
+                    <div class="col-lg-8 col-md-7" id="weightfield"><%= user.weight %></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Activity Level</div>
-                    <div class="col-lg-9 col-md-8" id="activityfield"><%= user.activity %></div>
+                    <div class="col-lg-4 col-md-5 label">Activity Level</div>
+                    <div class="col-lg-8 col-md-7" id="activityfield"><%= user.activity %></div>
                   </div>
                   <% if(user.allergies !== "") {%>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Allergies</div>
-                    <div class="col-lg-9 col-md-8" id="allergiesfield"><%= user.allergies %></div>
+                    <div class="col-lg-4 col-md-5 label">Allergies</div>
+                    <div class="col-lg-8 col-md-7" id="allergiesfield"><%= user.allergies %></div>
                   </div>
                   <%};%>
                   <% if(user.vegetarian) {%>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Vegetarian</div>
-                    <div class="col-lg-9 col-md-8" id="dietaryPreferencesfield">Yes</div>
+                    <div class="col-lg-4 col-md-5 label">Vegetarian</div>
+                    <div class="col-lg-8 col-md-7" id="dietaryPreferencesfield">Yes</div>
                   </div>
                   <%};%>
                   <% if(user.vegan) {%>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Vegan</div>
-                    <div class="col-lg-9 col-md-8" id="dietaryPreferencesfield">Yes</div>
+                    <div class="col-lg-4 col-md-5 label">Vegan</div>
+                    <div class="col-lg-8 col-md-7" id="dietaryPreferencesfield">Yes</div>
                   </div>
                   <%};%>
                   <% if(user.glutenFree) {%>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Gluten Free</div>
-                    <div class="col-lg-9 col-md-8" id="dietaryPreferencesfield">Yes</div>
+                    <div class="col-lg-4 col-md-5 label">Gluten Free</div>
+                    <div class="col-lg-8 col-md-7" id="dietaryPreferencesfield">Yes</div>
                   </div>
                   <%};%>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Health goal </div>
-                    <div class="col-lg-9 col-md-8" id="healthgoalfield"><%= user.healthgoal %></div>
+                    <div class="col-lg-4 col-md-5 label">Health goal </div>
+                    <div class="col-lg-8 col-md-7" id="healthgoalfield"><%= user.healthgoal %></div>
                   </div>
                   <% }; %>
                 </div>

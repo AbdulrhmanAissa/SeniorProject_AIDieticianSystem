@@ -23,8 +23,6 @@
                     <div class="card">
                       <div class="card-body">
                         <h5 class="card-title">Welcome <%= user.name %></h5>
-                        <!-- <p style="text-align: justify;">This is a place in which we can generate a meal plan that is customized to your needs.
-                             This meal plan will help you in reaching your health goal (<%= user.healthgoal %>).</p> -->
 
                         <p style="text-align: justify;">Sticking to a meal plan is a valuable commitment that can have a profound impact on your overall health 
                             and well-being. It serves as a roadmap for your daily nutritional intake, offering structure and 
@@ -66,7 +64,10 @@
                     const redirectButton = document.getElementById('button');
 
                     redirectButton.addEventListener('click', function() {
-
+                            // <button class="btn btn-primary" type="button" disabled>
+                            //     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            //     Loading...
+                            // </button>
                         const newPageUrl = '/mealplan'; 
                         window.location.href = newPageUrl;
                     });

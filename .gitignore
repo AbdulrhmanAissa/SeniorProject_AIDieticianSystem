@@ -1,4 +1,4 @@
 .DS_Store
 AI Dietician System Project.pdf
 README.md
-.env
+/service1/.env

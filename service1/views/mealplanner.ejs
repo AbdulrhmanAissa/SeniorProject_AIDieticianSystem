@@ -20,38 +20,10 @@
     <% if(mealplan) { %>
         <section class="section faq">
           <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
             <div class="card basic">
-                <div class="card-body" style="text-align: center; max-height: 135px;">
-                    <h5 class="card-title"> <hr>Your Meal Plan <hr></h5>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-8">
-              <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Daily Macronutrients</h5>
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingX">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseX" aria-expanded="false" aria-controls="flush-collapseX">
-                            Total Macros
-                          </button>
-                        </h2>
-                        <div id="flush-collapseX" class="accordion-collapse collapse" aria-labelledby="flush-headingX" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body"><div id="TotalMacroBarChart" style="min-height: 400px;" class="echart"></div></div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card basic">
-                        <div class="card-body">
-                            <h5 class="card-title"><hr></h5>
+                    <h5 class="card-title" style="text-align: center; min-height:158px"> <hr>Your Meal Plan <hr></h5>
                                 <h6>Breakfast</h6>
                                     <p><%= mealplan.Breakfast %></p>
                                     <h6>Snack One</h6>
@@ -67,9 +39,19 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
+                  <div class="card basic">
+                      <div class="card-body">
+                          <h5 class="card-title" style="text-align: center;"> <hr>Daily Macronutrients<hr></h5>
+                          <div id="TotalMacroBarChart" style="min-height: 400px;" class="echart"></div>
+                      </div>
+                  </div>
+                </div>
+          </div>
+            <div class="row">
+                <div class="col-lg-12">
                   <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Macronutrients Per Meal</h5>
+                      <h5 class="card-title" style="text-align: center;"><hr>Macronutrients Per Meal<hr></h5>
         
                       <!-- Accordion without outline borders -->
                       <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -134,22 +116,27 @@
                           var breakfastFat = '<%= mealplan.BreakfastMacronutrients.Fat %>'
                           var breakfastProtein = '<%= mealplan.BreakfastMacronutrients.Proteins %>'
                           var breakfastCarbs = '<%= mealplan.BreakfastMacronutrients.Carbs %>'
+                          var breakfastCalories = '<%= mealplan.BreakfastMacronutrients.Calories %>'
 
                           var snackOneFat = '<%= mealplan.SnackOneMacronutrients.Fat %>'
                           var snackOneProtein = '<%= mealplan.SnackOneMacronutrients.Proteins %>'
                           var snackOneCarbs = '<%= mealplan.SnackOneMacronutrients.Carbs %>'
+                          var snackOneCalories = '<%= mealplan.SnackOneMacronutrients.Calories %>'
 
-                          var LunchFat = '<%= mealplan.LunchMacronutrients.Fat %>'
-                          var LunchProtein = '<%= mealplan.LunchMacronutrients.Proteins %>'
-                          var LunchCarbs = '<%= mealplan.LunchMacronutrients.Carbs %>'
+                          var lunchFat = '<%= mealplan.LunchMacronutrients.Fat %>'
+                          var lunchProtein = '<%= mealplan.LunchMacronutrients.Proteins %>'
+                          var lunchCarbs = '<%= mealplan.LunchMacronutrients.Carbs %>'
+                          var lunchCalories = '<%= mealplan.LunchMacronutrients.Calories %>'
 
                           var snackTwoFat = '<%= mealplan.SnackTwoMacronutrients.Fat %>'
                           var snackTwoProtein = '<%= mealplan.SnackTwoMacronutrients.Proteins %>'
                           var snackTwoCarbs = '<%= mealplan.SnackTwoMacronutrients.Carbs %>'
+                          var snackTwoCalories = '<%= mealplan.SnackTwoMacronutrients.Calories %>'
 
                           var dinnerFat = '<%= mealplan.DinnerMacronutrients.Fat %>'
                           var dinnerProtein = '<%= mealplan.DinnerMacronutrients.Proteins %>'
                           var dinnerCarbs = '<%= mealplan.DinnerMacronutrients.Carbs %>'
+                          var dinnerCalories = '<%= mealplan.DinnerMacronutrients.Calories %>'
 
                           echarts.init(document.querySelector("#TotalMacroBarChart")).setOption({
                             tooltip: {
@@ -205,7 +192,6 @@
                               left: 'center'
                             },
                             series: [{
-                              name: 'Amount in Grams',
                               type: 'pie',
                               radius: ['40%', '70%'],
                               avoidLabelOverlap: false,
@@ -234,6 +220,10 @@
                                 {
                                   value: breakfastFat,
                                   name: 'Fat'
+                                },
+                                {
+                                  value: breakfastCalories,
+                                  name: 'Calories'
                                 }
                               ]
                             }]
@@ -247,7 +237,6 @@
                               left: 'center'
                             },
                             series: [{
-                              name: 'Amount in Grams',
                               type: 'pie',
                               radius: ['40%', '70%'],
                               avoidLabelOverlap: false,
@@ -276,6 +265,10 @@
                                 {
                                   value: snackOneFat,
                                   name: 'Fat'
+                                },
+                                {
+                                  value: snackOneCalories,
+                                  name: 'Calories'
                                 }
                               ]
                             }]
@@ -289,7 +282,6 @@
                               left: 'center'
                             },
                             series: [{
-                              name: 'Amount in Grams',
                               type: 'pie',
                               radius: ['40%', '70%'],
                               avoidLabelOverlap: false,
@@ -308,16 +300,20 @@
                                 show: false
                               },
                               data: [{
-                                  value: LunchProtein,
+                                  value: lunchProtein,
                                   name: 'Protein'
                                 },
                                 {
-                                  value: LunchCarbs,
+                                  value: lunchCarbs,
                                   name: 'Carbs'
                                 },
                                 {
-                                  value: LunchFat,
+                                  value: lunchFat,
                                   name: 'Fat'
+                                },
+                                {
+                                  value: lunchCalories,
+                                  name: 'Calories'
                                 }
                               ]
                             }]
@@ -331,7 +327,6 @@
                               left: 'center'
                             },
                             series: [{
-                              name: 'Amount in Grams',
                               type: 'pie',
                               radius: ['40%', '70%'],
                               avoidLabelOverlap: false,
@@ -360,6 +355,10 @@
                                 {
                                   value: snackTwoFat,
                                   name: 'Fat'
+                                },
+                                {
+                                  value: snackTwoCalories,
+                                  name: 'Calories'
                                 }
                               ]
                             }]
@@ -373,7 +372,6 @@
                               left: 'center'
                             },
                             series: [{
-                              name: 'Amount in Grams',
                               type: 'pie',
                               radius: ['40%', '70%'],
                               avoidLabelOverlap: false,
@@ -402,6 +400,10 @@
                                 {
                                   value: dinnerFat,
                                   name: 'Fat'
+                                },
+                                {
+                                  value: dinnerCalories,
+                                  name: 'Calories'
                                 }
                               ]
                             }]

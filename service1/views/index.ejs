@@ -25,7 +25,7 @@
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
+            <div class="col-xxl-6 col-md-6">
               <div class="card info-card sales-card">
 
                  <div class="card-body">
@@ -33,12 +33,11 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-basket2"></i>
+                      <i class="ri-fire-line"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h6>1247 kcal</h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
                     </div>
                   </div>
                 </div>
@@ -49,7 +48,7 @@
             <!-- Revenue Card -->
       
             <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
+            <div class="col-xxl-6 col-xl-12">
 
               <div class="card info-card customers-card">
              <div class="card-body">
@@ -60,7 +59,7 @@
                       <i class="bi bi-droplet-half"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
+                      <h6>1.3 L</h6>
                       <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>
@@ -75,38 +74,26 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Reports</h5>
-
-                  <!-- Bar Chart -->
-                  <canvas id="barChart" style="max-height: 400px;"></canvas>
+                  <h5 class="card-title">Calories & Water Tracking</h5>
+                  <canvas id="lineChart" style="max-height: 400px;"></canvas>
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      new Chart(document.querySelector('#barChart'), {
-                        type: 'bar',
+                      new Chart(document.querySelector('#lineChart'), {
+                        type: 'line',
                         data: {
-                          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                          labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                           datasets: [{
-                            label: 'Bar Chart',
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            backgroundColor: [
-                              'rgba(255, 99, 132, 0.2)',
-                              'rgba(255, 159, 64, 0.2)',
-                              'rgba(255, 205, 86, 0.2)',
-                              'rgba(75, 192, 192, 0.2)',
-                              'rgba(54, 162, 235, 0.2)',
-                              'rgba(153, 102, 255, 0.2)',
-                              'rgba(201, 203, 207, 0.2)'
-                            ],
-                            borderColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(255, 159, 64)',
-                              'rgb(255, 205, 86)',
-                              'rgb(75, 192, 192)',
-                              'rgb(54, 162, 235)',
-                              'rgb(153, 102, 255)',
-                              'rgb(201, 203, 207)'
-                            ],
-                            borderWidth: 1
+                            label: 'Calories',
+                            data: [1665, 1659, 1860, 1813, 1556, 1955, 1450],
+                            fill: false,
+                            borderColor: '#ee6666',
+                            tension: 0
+                          },{
+                            label: 'Water',
+                            data: [1600,1356,1878,2321,1945,1978,1934],
+                            fill: false,
+                            borderColor: '#5470c6',
+                            tension: 0
                           }]
                         },
                         options: {
@@ -119,7 +106,6 @@
                       });
                     });
                   </script>
-                  <!-- End Bar CHart -->
 
                 </div>
           
@@ -132,218 +118,83 @@
 
         <!-- Right side columns -->
         <div class="col-lg-4">
-
-                
-
-          <!-- Budget Report -->
-          <!-- <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
+          <div class="card basic">
+            <div class="card-body">
+              <h5 class="card-title">5 Steps To Success</h5>
+              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">1. Visualize Success:</p> 
+              <p style="text-align: justify; font-family: Poppins, sans-serif;">Picture how achieving your goals will improve your life.</p>
+              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">2. Track Progress:</p>
+              <p style="text-align: justify; font-family: Poppins, sans-serif;">Document your journey to see your achievements.</p>
+              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">3. Stay Consistent:</p>
+              <p style="text-align: justify; font-family: Poppins, sans-serif;">Every healthy meal is a step toward success.</p>
+              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">4. Stay Positive:</p>
+              <p style="text-align: justify; font-family: Poppins, sans-serif;">Use self-affirmations to boost confidence.</p>
+              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">5. Believe in Yourself:</p>
+              <p style="text-align: justify; font-family: Poppins, sans-serif;">Trust your ability to make positive choices.</p>
+              <p style="text-align: justify; color: #012970; font-family: Poppins, sans-serif;">Remember, you have the strength to stick to your meal plan and reach your goals. Keep going! 💪🥗🌟</p>
             </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+        <div class="row">
+          
+          <div class="col-xxl-4 col-md-4">
+            <div class="card info-card protein-card">
 
-            <div class="card-body pb-0">
-              <h5 class="card-title">Budget Report <span>| This Month</span></h5>
+               <div class="card-body">
+                <h5 class="card-title">Protein <span>| Today</span></h5>
 
-              <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                      data: ['Allocated Budget', 'Actual Spending']
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Sales',
-                          max: 6500
-                        },
-                        {
-                          name: 'Administration',
-                          max: 16000
-                        },
-                        {
-                          name: 'Information Technology',
-                          max: 30000
-                        },
-                        {
-                          name: 'Customer Support',
-                          max: 38000
-                        },
-                        {
-                          name: 'Development',
-                          max: 52000
-                        },
-                        {
-                          name: 'Marketing',
-                          max: 25000
-                        }
-                      ]
-                    },
-                    series: [{
-                      name: 'Budget vs spending',
-                      type: 'radar',
-                      data: [{
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: 'Allocated Budget'
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: 'Actual Spending'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div> 
-          </div>--> <!-- End Budget Report -->
-
-          <!-- Website Traffic -->
-          <!-- <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-lightning-charge"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>65 g</h6>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
+          </div>
+              <div class="col-xxl-4 col-md-4">
+                <div class="card info-card carb-card">
+  
+                   <div class="card-body">
+                    <h5 class="card-title">Carbs <span>| Today</span></h5>
+  
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="ri-seedling-line"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>78 g</h6>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-xxl-4 col-md-4">
+                <div class="card info-card fat-card">
+  
+                   <div class="card-body">
+                    <h5 class="card-title">Fat <span>| Today</span></h5>
+  
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-egg-fried"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>43 g</h6>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
 
             </div>
-          </div> --> <!-- End Website Traffic -->
-
-          <!-- News & Updates Traffic -->
-          <!-- <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="public/assets/img/news-1.jpg" alt="">
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="public/assets/img/news-2.jpg" alt="">
-                  <h4><a href="#">Quidem autem et impedit</a></h4>
-                  <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="public/assets/img/news-3.jpg" alt="">
-                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="public/assets/img/news-4.jpg" alt="">
-                  <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                  <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="public/assets/img/news-5.jpg" alt="">
-                  <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-                </div>
-
-              </div>  End sidebar recent posts
-
-            </div>
-          </div> --><!-- End News & Updates -->
-
-        </div><!-- End Right side columns -->
-
-      </div>
+          </div>
+        </div>
     </section>
 
   </main><!-- End #main -->
