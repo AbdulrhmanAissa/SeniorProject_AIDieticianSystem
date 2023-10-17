@@ -1,0 +1,85 @@
+<%- include("./partials/header.ejs") %>
+
+<body class="d-flex flex-column vh-100">
+
+    <%- include('./partials/landing-navbar.ejs')%>
+
+    <main id="main" class="main" style="margin-left: 0;">
+
+        <div class="pagetitle">
+          <h1>Who Are We</h1>
+        </div><!-- End Page Title -->
+    
+        <section class="section faq">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card basic" style="text-align: justify;">
+                        <div class="card-body">
+                            <h5 class="card-title">Welcome to AI Dietician System</h5>
+                            <div>
+                                <h6>Are You Ready??</h6>
+                                <p>Are you ready to embark on a journey towards a healthier, more vibrant you? Look no further! Our AI Dietician System is your dedicated companion on the path to better nutrition and well-being.</p>
+                            </div>
+                            <div>
+                                <h6>Join Our Community:</h6>
+                                <p>Eating well is easier when you're not alone. Join our community of like-minded individuals who are on their own health and wellness journeys. Share recipes, success stories, and tips with fellow users.</p>
+                            </div>
+                
+                            <div>
+                                <h6>Start Your Healthier Lifestyle Today:</h6>
+                                <p>Your journey to better health begins here. Sign up now and let our AI Dietician System guide you to a happier, healthier you. It's time to take control of your diet and transform your life.</p>
+                            </div>
+                            <div>
+                                <h6>Get Started</h6>
+                                <div class="col-6" style="align-items: center; margin: auto;">
+                                    <button class="btn btn-primary" id="CreateAccountBtn">Create Account</button>
+                                    <button class="btn btn-primary" id="LoginBtn">Login</button>
+                                  </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card basic" style="text-align: justify;">
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <div>
+                                <h6>Features and Benefits:</h6>
+                                <ul>
+                                    <li style="padding-bottom: 1.5rem;"><p style="font-weight: bold;">Personalized Nutrition Plans:</p> Our AI system tailors meal plans specifically for your unique dietary needs, goals, and restrictions. Whether you're looking to lose weight, gain muscle, or simply eat more mindfully, we've got you covered.</li>
+                                    <li style="padding-bottom: 1.5rem;"><p style="font-weight: bold;">Real-Time Nutritional Insights:</p> Get instant feedback on the nutritional value of your meals. Our AI analyzes your food choices and provides recommendations to help you make healthier decisions.</li>
+                                    <li style="padding-bottom: 1.5rem;"><p style="font-weight: bold;">Recipe Suggestions:</p> Struggling with meal ideas? Discover a treasure trove of delicious and nutritious recipes. From vegetarian to vegan, gluten-free to keto, our system covers a wide range of dietary preferences.</li>
+                                    <li style="padding-bottom: 1.5rem;"><p style="font-weight: bold;">Progress Tracking:</p> Track your dietary progress, monitor your weight, and see how your eating habits are evolving over time. Celebrate your successes and keep working towards your goals.</li>
+                                    <li style="padding-bottom: 1.5rem;"><p style="font-weight: bold;">Expert Guidance:</p> Access a wealth of nutritional information and advice at your fingertips. Our AI Dietician is here to answer your questions and provide guidance whenever you need it.</li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <script>
+                const CreateAccountBtn = document.getElementById("CreateAccountBtn");
+                const LoginBtn = document.getElementById("LoginBtn");
+
+                CreateAccountBtn.addEventListener('click', function() {
+                    const newPageUrl = '/register'; 
+                    window.location.href = newPageUrl;
+                });
+
+                LoginBtn.addEventListener('click', function() {
+                    const newPageUrl = '/login'; 
+                    window.location.href = newPageUrl;
+                });
+            </script>
+        </section>
+    
+      </main><!-- End #main -->
+      <%- include('./partials/footer.ejs')%>
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+      <%- include('./partials/js.ejs')%>
+    </body>
+    
+    </html>

@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const  OpenAIApi  = require('openai');
 const User = require('../model/User');
 
+
 const openai = new OpenAIApi.OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
@@ -87,16 +88,6 @@ const logout = (req, res) => {
 
 const myprofile_get = async (req, res) => {
    user = req.session.user;
-
-   weight = req.session.user.weight;
-   height = req.session.user.height;
-   age = req.session.user.age;
-   gender = req.session.user.gender;
-
-   const bmr = calculateHarrisBenedictBMR(weight, height, age, gender);
-
-   console.log(bmr);
-
    res.render('users-profile',{ user: user });
 };
 
@@ -165,26 +156,37 @@ const editprofile_post = async (req, res) => {
 const mealplanner = async (req,res)=>{
    try {
    user = req.session.user;
-   if(user.mealplan !== undefined){
-      console.log(user.mealplan);
-      res.render('mealplanner',{mealplan: user.mealplan});
-   }else{
-      weight = req.session.user.weight;
-      height = req.session.user.height;
-      age = req.session.user.age;
-      gender = req.session.user.gender;
-
-      const bmr = calculateHarrisBenedictBMR(weight, height, age, gender);
+   // if(user.mealplan !== undefined){
+   //    const NewDateTime = new Date();
+   //    const Time = NewDateTime - user.mealplan.ResponseDateTime;
+   //    console.log(Time);
+   //    console.log(user.mealplan);
+   //    res.render('mealplanner',{mealplan: user.mealplan});
+   // }else{
+      const bmr = floorToNearestHundred(calculateHarrisBenedictBMR(user.weight, user.height, user.age, user.gender));
+      console.log("BMR = "+bmr);
+      console.log("Total Calories = "+floorToNearestHundred(calculateHarrisBenedictTotalCalories(bmr,user.activity)));
 
       prompt = `Create a meal plan for a ${user.age} year old ${user.gender} who has 
      a weight of ${user.weight}kg and a height of ${user.height}cm and an activity level of 
-     ${user.activity} and a health goal of ${user.healthgoal}. BMR = ${bmr}`; 
+     ${user.activity} and a health goal of ${user.healthgoal}. BMR = ${bmr}. 
+     The total Calories should be ${floorToNearestHundred(calculateHarrisBenedictTotalCalories(bmr,user.activity))}`; 
       
-      // if(user.vegetarian){prompt+=" They are a vegetarian."};
-      // if(user.vegan){prompt+="They are a vegan."};
-      // if(user.glutenFree){prompt+="They are Gluten Free"};
-      // if(typeof user.allergies === "string"){
-      //    if(allergies.length !== 0){prompt+=`They have the following allergies ${user.allergies}.`}};
+     if(user.vegetarian!== undefined){
+      if(user.vegetarian){prompt+="IMPORTANT!!! : They are a vegetarian. (exclude meat, poultry, ﬁsh and seafood)"};
+     }
+
+     if(user.vegan !== undefined){
+      if(user.vegan){prompt+="IMPORTANT!!! : They are a vegan. (exclude all meat and animal products)"};
+     } 
+
+     if(user.glutenFree !== undefined){
+      if(user.glutenFree){prompt+="IMPORTANT!!! : They are Gluten Free (exclude any foods that contain gluten)"};
+     }
+      
+     if(user.allergies !== undefined){
+      if(user.allergies.length !== 0){prompt+=`IMPORTANT!!! : They have the following allergies ${user.allergies}.`}
+     };
 
       prompt+="\n#######\n Provide the total macronutrients as a JSON object(Carbs,Proteins,Fat) in grams for each meal and snack along with the Calories (as numbers not string).\n#######\n Provide the response in JSON format with keys of Breakfast, BreakfastMacronutrients,SnackOne, SnackOneMacronutrients, Lunch, LunchMacronutrients, SnackTwo, SnackTwoMacronutrients, Dinner, DinnerMacronutrients, Proteins, Carbs, Fat, Calories."
       prompt+="\n#######\nThe response should follow this format:"
@@ -194,13 +196,19 @@ const mealplanner = async (req,res)=>{
        messages: [{"role": "user", "content": prompt}],
      });
 
-   let newmealplan = response.choices[0].message.content;
-   let newmealplan_json = JSON.parse(newmealplan);
-     newuser = await User.findOneAndUpdate({_id: user._id},{ $set:{mealplan: newmealplan_json}},{returnOriginal: false});
+     const ResponseDateTime = new Date();
+     console.log(ResponseDateTime);
+
+      let newmealplan = response.choices[0].message.content;
+      let newmealplan_json = JSON.parse(newmealplan);
+      newmealplan_json.ResponseDateTime = ResponseDateTime;
+
+      newuser = await User.findOneAndUpdate({_id: user._id},{ $set:{mealplan: newmealplan_json}},{returnOriginal: false});
       req.session.user = newuser;
+
       console.log(newmealplan_json);
-   res.render('mealplanner',{ mealplan: newmealplan_json });
-   }
+      res.render('mealplanner',{ mealplan: newmealplan_json });
+   // }
    } catch (error) {
      console.log(error);
      res.redirect("/myprofile");
@@ -209,7 +217,16 @@ const mealplanner = async (req,res)=>{
 
 const meal_generator = async (req,res) =>{
    user = req.session.user;
+   const MillSecInDay = 86400000;
    if(user.mealplan !== undefined){
+      const NewDateTime = new Date();
+      const Time = NewDateTime - user.mealplan.ResponseDateTime;
+      console.log(Time);
+
+      if(Time > MillSecInDay){
+         res.render('mealgenerator',{user: user});
+      }
+      
       res.render('mealplanner',{mealplan: user.mealplan});
    }
    else{
@@ -232,23 +249,21 @@ if (gender === "Male") {
 }
 
 function calculateHarrisBenedictTotalCalories(bmr, activityLevel) {
-// Activity levels:
-// 1. Sedentary (little or no exercise): BMR * 1.2
-// 2. Lightly active (light exercise or sports 1-3 days a week): BMR * 1.375
-// 3. Moderately active (moderate exercise or sports 3-5 days a week): BMR * 1.55
-// 4. Very active (hard exercise or sports 6-7 days a week): BMR * 1.725
-// 5. Super active (very hard exercise, physical job, or training twice a day): BMR * 1.9
 
 switch (activityLevel) {
-   case 1:
+   case "Sedentary":
+      return bmr * 1;
+   case "Moderate":
       return bmr * 1.2;
-   case 3:
-      return bmr * 1.55;
-   case 5:
-      return bmr * 1.9;
+   case "Active":
+      return bmr * 1.5;
    default:
       throw new Error('Invalid activity level. Choose a value between 1 and 5.');
 }
+}
+
+function floorToNearestHundred(number) {
+   return Math.floor(number / 100) * 100;
 }
 
 // const totalCalories = calculateHarrisBenedictTotalCalories(bmr, activityLevel);

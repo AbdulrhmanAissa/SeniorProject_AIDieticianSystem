@@ -170,7 +170,9 @@ app.get('/userdata', (req,res)=>{
   user = req.session.user;
   res.json(user);
 });
-
+app.get("/", (req,res) => {
+  res.render('pages-landing');
+})
 app.get("/login", serviceController.login_get);
 app.get("/register", serviceController.register_get);
 app.get("/myprofile", isAuth, serviceController.myprofile_get);

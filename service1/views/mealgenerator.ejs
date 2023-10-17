@@ -1,12 +1,12 @@
 <%- include("./partials/header.ejs") %>
 
 <body class="d-flex flex-column vh-100">
-
     <%- include('./partials/navbar.ejs')%>
 
     <%- include('./partials/sidebar.ejs')%>
+        
     <main id="main" class="main">
-
+        
         <div class="pagetitle">
         <h1>AI Meal Generator</h1>
         <nav>
@@ -17,7 +17,9 @@
             </ol>
         </nav>
         </div><!-- End Page Title -->
+        
         <section class="section faq">
+            
             <% if(user){ %>
                 <div class="col-lg-12">
                     <div class="card">
@@ -54,7 +56,7 @@
                             your present and future health, ensuring that your dietary choices align with your health goals and aspirations.</p>
 
                              <h5 class="card-title" style="text-align: center;">AI Generated Meal Plan</h5>
-                        <div class="d-grid gap-2 mt-3">
+                        <div class="d-grid gap-2 mt-3" id="buttonField">
                             <button id="button" class="btn btn-primary" style="width: 40%; justify-self: center;">Generate Meal Plan</button>
                         </div>
                       </div>
@@ -62,12 +64,12 @@
                 </div>  
                 <script>
                     const redirectButton = document.getElementById('button');
+                    const ButtonField = document.getElementById("buttonField");
 
                     redirectButton.addEventListener('click', function() {
-                            // <button class="btn btn-primary" type="button" disabled>
-                            //     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            //     Loading...
-                            // </button>
+                        ButtonField.innerHTML = '<button class="btn btn-primary" style="width: 40%; justify-self: center;" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...</button>';   
+                        
+                        //if you want to disable the function so you can adjust the front end just comment the next two lines.
                         const newPageUrl = '/mealplan'; 
                         window.location.href = newPageUrl;
                     });
