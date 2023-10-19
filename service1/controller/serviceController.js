@@ -4,6 +4,18 @@ const User = require('../model/User');
 const Recipes = require('../model/Recipes');
 
 
+// Recipes Conroller
+
+const getAllRecipes = async (req, res) => {
+   try {
+     const recipes = await Recipes.find();
+     console.log('Fetched recipes:', recipes); // Add this line for logging
+     res.status(200).json(recipes);
+   } catch (err) {
+     console.error('Error fetching recipes:', err); // Add this line for logging
+     res.status(500).json({ error: err.message });
+   }
+};
 
 
 const openai = new OpenAIApi.OpenAI({
@@ -274,4 +286,4 @@ function floorToNearestHundred(number) {
 
 module.exports = { register_get, login_get, logout,
     register_post, login_post, myprofile_get,
-      changepass_post, editprofile_post, mealplanner, faq, meal_generator };
+      changepass_post, editprofile_post, mealplanner, faq, meal_generator, getAllRecipes };

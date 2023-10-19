@@ -33,14 +33,7 @@ app.use(session({
 }));
 
 //Recipes Router
-app.get('/recipes-page', async (req, res) => {
-  try {
-    const recipes = await Recipes.find(); // Fetch recipes from the database
-    res.render('recipes-page.ejs', { recipes }); // Pass the data to the EJS template
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+app.get("/recipes-page", serviceController.getAllRecipes);
 
 
 app.get("/Dashboard", (req,res)=>{
