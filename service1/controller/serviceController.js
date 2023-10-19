@@ -1,6 +1,9 @@
 const bcrypt = require("bcryptjs");
 const  OpenAIApi  = require('openai');
 const User = require('../model/User');
+const Recipes = require('../model/Recipes');
+
+
 
 
 const openai = new OpenAIApi.OpenAI({

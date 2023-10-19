@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const serviceController = require("./controller/serviceController");
 const isAuth = require("./middleware/isAuth");
+const Recipes = require("./model/Recipes");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -30,6 +31,17 @@ app.use(session({
 	resave: true,
 	store: sessionStore
 }));
+
+//Recipes Router
+app.get('/recipes-page', async (req, res) => {
+  try {
+    const recipes = await Recipes.find(); // Fetch recipes from the database
+    res.render('recipes-page.ejs', { recipes }); // Pass the data to the EJS template
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 app.get("/Dashboard", (req,res)=>{
   user = req.session.user;
