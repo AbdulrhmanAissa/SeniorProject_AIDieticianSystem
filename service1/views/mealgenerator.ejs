@@ -1,9 +1,215 @@
 <%- include("./partials/header.ejs") %>
 
+<style>
+    #loader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: #4154f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .cube-folding {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        transform: rotate(45deg);
+        font-size: 0;
+    }
+    .cube-folding span {
+        position: relative;
+        width: 25px;
+        height: 25px;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        transform: scale(1.1);
+        display: inline-block;
+    }
+    .cube-folding span::before {
+        content: "";
+        background-color: white;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 25px;
+        height: 25px;
+        -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+        -webkit-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+        -webkit-animation: folding 2.5s infinite linear both;
+        -moz-animation: folding 2.5s infinite linear both;
+        animation: folding 2.5s infinite linear both;
+    }
+    .cube-folding .leaf2 {
+        -webkit-transform: rotateZ(90deg) scale(1.1);
+        -moz-transform: rotateZ(90deg) scale(1.1);
+        transform: rotateZ(90deg) scale(1.1);
+    }
+    .cube-folding .leaf2::before {
+        -webkit-animation-delay: 0.3s;
+        animation-delay: 0.3s;
+        background-color: #f2f2f2;
+    }
+    .cube-folding .leaf3 {
+        -webkit-transform: rotateZ(270deg) scale(1.1);
+        -moz-transform: rotateZ(270deg) scale(1.1);
+        transform: rotateZ(270deg) scale(1.1);
+    }
+    .cube-folding .leaf3::before {
+        -webkit-animation-delay: 0.9s;
+        animation-delay: 0.9s;
+        background-color: #f2f2f2;
+    }
+    .cube-folding .leaf4 {
+        -webkit-transform: rotateZ(180deg) scale(1.1);
+        -moz-transform: rotateZ(180deg) scale(1.1);
+        transform: rotateZ(180deg) scale(1.1);
+    }
+    .cube-folding .leaf4::before {
+        -webkit-animation-delay: 0.6s;
+        animation-delay: 0.6s;
+        background-color: #e6e6e6;
+    }
+
+    @-webkit-keyframes folding {
+        0%,
+        10% {
+            -webkit-transform: perspective(140px) rotateX(-180deg);
+            -moz-transform: perspective(140px) rotateX(-180deg);
+            transform: perspective(140px) rotateX(-180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+        25%,
+        75% {
+            -webkit-transform: perspective(140px) rotateX(0deg);
+            -moz-transform: perspective(140px) rotateX(0deg);
+            transform: perspective(140px) rotateX(0deg);
+            -webkit-opacity: 1;
+            -moz-opacity: 1;
+            opacity: 1;
+        }
+        90%,
+        100% {
+            -webkit-transform: perspective(140px) rotateY(180deg);
+            -moz-transform: perspective(140px) rotateY(180deg);
+            transform: perspective(140px) rotateY(180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+    }
+    @-moz-keyframes folding {
+        0%,
+        10% {
+            -webkit-transform: perspective(140px) rotateX(-180deg);
+            -moz-transform: perspective(140px) rotateX(-180deg);
+            transform: perspective(140px) rotateX(-180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+        25%,
+        75% {
+            -webkit-transform: perspective(140px) rotateX(0deg);
+            -moz-transform: perspective(140px) rotateX(0deg);
+            transform: perspective(140px) rotateX(0deg);
+            -webkit-opacity: 1;
+            -moz-opacity: 1;
+            opacity: 1;
+        }
+        90%,
+        100% {
+            -webkit-transform: perspective(140px) rotateY(180deg);
+            -moz-transform: perspective(140px) rotateY(180deg);
+            transform: perspective(140px) rotateY(180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+    }
+    @-ms-keyframes folding {
+        0%,
+        10% {
+            -webkit-transform: perspective(140px) rotateX(-180deg);
+            -moz-transform: perspective(140px) rotateX(-180deg);
+            transform: perspective(140px) rotateX(-180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+        25%,
+        75% {
+            -webkit-transform: perspective(140px) rotateX(0deg);
+            -moz-transform: perspective(140px) rotateX(0deg);
+            transform: perspective(140px) rotateX(0deg);
+            -webkit-opacity: 1;
+            -moz-opacity: 1;
+            opacity: 1;
+        }
+        90%,
+        100% {
+            -webkit-transform: perspective(140px) rotateY(180deg);
+            -moz-transform: perspective(140px) rotateY(180deg);
+            transform: perspective(140px) rotateY(180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+    }
+    @keyframes folding {
+        0%,
+        10% {
+            -webkit-transform: perspective(140px) rotateX(-180deg);
+            -moz-transform: perspective(140px) rotateX(-180deg);
+            transform: perspective(140px) rotateX(-180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+        25%,
+        75% {
+            -webkit-transform: perspective(140px) rotateX(0deg);
+            -moz-transform: perspective(140px) rotateX(0deg);
+            transform: perspective(140px) rotateX(0deg);
+            -webkit-opacity: 1;
+            -moz-opacity: 1;
+            opacity: 1;
+        }
+        90%,
+        100% {
+            -webkit-transform: perspective(140px) rotateY(180deg);
+            -moz-transform: perspective(140px) rotateY(180deg);
+            transform: perspective(140px) rotateY(180deg);
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+    }
+    </style>
+
 <body class="d-flex flex-column vh-100">
     <%- include('./partials/navbar.ejs')%>
 
     <%- include('./partials/sidebar.ejs')%>
+
+    <div id="loader">
+        <h2 style="color: white;"><div id="factDisplay" style="text-align:center"></div></h2>
+        <div class="cube-folding" style="margin-left: 50px;">
+            <span class="leaf1"></span>
+            <span class="leaf2"></span>
+            <span class="leaf3"></span>
+            <span class="leaf4"></span>
+        </div> 
+    </div>
         
     <main id="main" class="main">
         
@@ -73,6 +279,37 @@
                         const newPageUrl = '/mealplan'; 
                         window.location.href = newPageUrl;
                     });
+
+                    //Loader Functions 
+                    document.onreadystatechange = function () {
+                        if (document.readyState !== "complete") {
+                            document.querySelector(
+                                "body").style.visibility = "hidden";
+                            document.querySelector(
+                                "#loader").style.visibility = "visible";
+                        } else {
+                            document.querySelector(
+                                "#loader").style.display = "none";
+                            document.querySelector(
+                                "body").style.visibility = "visible";
+                        }
+                    };
+
+                    (function newFact() {
+                        var facts = ['Drinking at least five glasses of water a day can reduce your chances of suffering from a heart attack by 40%.', 
+                        'Repeatedly using a plastic water bottle can release chemicals into your water. Why not try a reusable bottle instead? It’s good for you and the planet.', 
+                        'Brushing teeth too soon after eating or drinking can soften the tooth enamel, especially if you’ve just been eating or drinking acidic foods.', 
+                        'You dont actually breathe through both nostrils at the same time.', 
+                        'Your body produces enough heat in 30 minutes to boil half a gallon of water.', 
+                        'Most people produce enough saliva in their lifetimes to fill two swimming pools.', 
+                        'Veins, which carry blood to the heart, have one-way valves that ensure blood flows in only one direction.', 
+                        'According to a study from Harvard University, people who are always running late tend to be happier and live longer!',
+                        'Your sensitivity to certain allergens may be connected to your birth weight.',
+                        'The human heart delivers blood to the body through a superhighway of blood vessels.',
+                        'Maintaining good relationships with your friends and family, reduces harmful levels of stress and boosts your immune system.'];
+                        var randomFact = Math.floor(Math.random() * facts.length);
+                        document.getElementById('factDisplay').innerHTML = facts[randomFact];
+                    })();
                 </script>
             <% }; %>
         </section>
