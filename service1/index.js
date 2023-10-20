@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const serviceController = require("./controller/serviceController");
 const isAuth = require("./middleware/isAuth");
-const Recipes = require("./model/Recipes");
 
 const app = express();
 app.set("view engine", "ejs");

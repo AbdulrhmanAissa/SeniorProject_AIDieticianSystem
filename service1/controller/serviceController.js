@@ -5,18 +5,14 @@ const Recipes = require('../model/Recipes');
 
 
 // Recipes Conroller
-
 const getAllRecipes = async (req, res) => {
-   try {
-     const recipes = await Recipes.find();
-     console.log('Fetched recipes:', recipes); // Add this line for logging
-     res.status(200).json(recipes);
-   } catch (err) {
-     console.error('Error fetching recipes:', err); // Add this line for logging
-     res.status(500).json({ error: err.message });
-   }
+  try {
+    const recipes = await Recipes.find();
+    res.render('recipes-page.ejs', { recipes });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
-
 
 const openai = new OpenAIApi.OpenAI({
   apiKey: process.env.OPENAI_API_KEY

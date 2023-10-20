@@ -64,21 +64,22 @@
         </div>
         <br>
         <!-- Cards -->
+        <% recipes.forEach((recipe) => { %>
           <div class="card col-5">
             <div class="container">
-              <h4 id="recipeName"><b>Chicken Pasta</b></h4>
+              <h4 id="recipeName"><b><%= recipe.name %></b></h4>
               <div class="row">
                 <div class="col">
-                  <h6 id="recipeCalories">Calories: 100 cal</h6>
-                  <h6 id="recipeFat">Fat: 10g</h6>
-                  <h6 id="recipeSatFat">Saturated Fat: 13g</h6>
-                  <h6 id="recipeProtien">Protien: 14g</h6>
+                  <h6 id="recipeCalories">Calories: <%= recipe.calories %> cal</h6>
+                  <h6 id="recipeFat">Fat: <%= recipe.fat %>g</h6>
+                  <h6 id="recipeSatFat">Saturated Fat: <%= recipe.satfat %>g</h6>
+                  <h6 id="recipeProtien">Protein: <%= recipe.protein %>g</h6>
                 </div>
               
                 <div class="col">
-                  <h6 id="recipeCarbs">Carbohydrates: 15g</h6>
-                  <h6 id="recipeFiber">Fiber: 12g</h6>
-                  <h6 id="recipeSugar">Sugar: 18g</h6>
+                  <h6 id="recipeCarbs">Carbohydrates: <%= recipe.carbs %>g</h6>
+                  <h6 id="recipeFiber">Fiber: <%= recipe.fiber %>g</h6>
+                  <h6 id="recipeSugar">Sugar: <%= recipe.sugar %>g</h6>
                 </div>
               </div>
               <p  style="text-align: center;">
@@ -89,61 +90,22 @@
                 <div class="col">
                   <div class="collapse multi-collapse" id="instructions1">
                     <div class="card card-body">
-                      Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                      <%= recipe.instructions %>
                     </div>
                   </div>
                 </div>
                 <div class="col">
                   <div class="collapse multi-collapse" id="ingredients1">
                     <div class="card card-body">
-                      Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                    </div>
+                      <% recipe.ingredients.forEach((ingredient) => { %>
+                        <li><%= ingredient %></li>
+                      <% }); %>                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-1"></div> 
-          <div class="card col-5">
-            <div class="container">
-              <h4 id="recipeName"><b>Chicken Pasta</b></h4>
-              <div class="row">
-                <div class="col">
-                  <h6 id="recipeCalories">Calories: 100 cal</h6>
-                  <h6 id="recipeFat">Fat: 10g</h6>
-                  <h6 id="recipeSatFat">Saturated Fat: 13g</h6>
-                  <h6 id="recipeProtien">Protien: 14g</h6>
-                </div>
-              
-                <div class="col">
-                  <h6 id="recipeCarbs">Carbohydrates: 15g</h6>
-                  <h6 id="recipeFiber">Fiber: 12g</h6>
-                  <h6 id="recipeSugar">Sugar: 18g</h6>
-                </div>
-              </div>
-              <p  style="text-align: center;">
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#instructions2" role="button" aria-expanded="false" aria-controls="instructions2">Instructions</a>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#ingredients2" aria-expanded="false" aria-controls="ingredients2">Ingredients</button>
-              </p>
-              <div class="row">
-                <div class="col">
-                  <div class="collapse multi-collapse" id="instructions2">
-                    <div class="card card-body">
-                      Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="collapse multi-collapse" id="ingredients2">
-                    <div class="card card-body">
-                      Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
+          <% }) %>
     </section>
 
   </main><!-- End #main -->
