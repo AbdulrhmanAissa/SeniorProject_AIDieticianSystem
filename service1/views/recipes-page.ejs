@@ -58,14 +58,15 @@
     <section class="section profile">
       <div class="row justify-content-center">
         <!-- Search Bar -->
-        <div class="search-container" style="margin-bottom: 30px;">
+        <div class="search-container col-2" style="margin-bottom: 30px;">
           <i class="fa fa-search"></i>
           <input type="text" id="search-input" placeholder="Search..." autocomplete="off"/>
         </div>
         <br>
         <!-- Cards -->
         <% recipes.forEach((recipe) => { %>
-          <div class="card col-5">
+          
+          <div class="card col-5" style="margin-right: 30px;">
             <div class="container">
               <h4 id="recipeName"><b><%= recipe.name %></b></h4>
               <div class="row">
