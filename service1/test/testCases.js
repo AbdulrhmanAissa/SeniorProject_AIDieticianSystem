@@ -1,11 +1,11 @@
 //Meal generator test cases
 
 const meal_generator = require('./meal_generator'); // Import your function
-const { mockRequest, mockResponse } = require('express');
+const { req, res } = require('express');
 
 describe('meal_generator', () => {
   it('should render mealgenerator when the mealplan is older than a day', () => {
-    // Create a mock user with an outdated mealplan
+    
     const user = {
       mealplan: {
         ResponseDateTime: new Date(new Date() - 2 * 24 * 60 * 60 * 1000), // Older than a day
@@ -22,15 +22,15 @@ describe('meal_generator', () => {
   });
 
   it('should render mealplanner when the mealplan is up to date', () => {
-    // Create a mock user with an up-to-date mealplan
+
     const user = {
       mealplan: {
         ResponseDateTime: new Date(),
       },
     };
 
-    const req = mockRequest({ session: { user } });
-    const res = mockResponse();
+    const req = request({ session: { user } });
+    const res = response();
 
     meal_generator(req, res);
 
@@ -39,11 +39,11 @@ describe('meal_generator', () => {
   });
 
   it('should render mealgenerator when the user has no mealplan', () => {
-    // Create a mock user with no mealplan
+    
     const user = {};
 
-    const req = mockRequest({ session: { user } });
-    const res = mockResponse();
+    const req = request({ session: { user } });
+    const res = response();
 
     meal_generator(req, res);
 
@@ -61,7 +61,7 @@ const { mockRequest, mockResponse } = require('express');
 
 describe('getAllRecipes', () => {
   it('should render recipes-page with a list of recipes', async () => {
-    // Mock the Recipes.find function to return a sample list of recipes
+    
     const sampleRecipes = [
       { title: 'Recipe 1', description: 'Description 1' },
       { title: 'Recipe 2', description: 'Description 2' },
@@ -79,12 +79,12 @@ describe('getAllRecipes', () => {
   });
 
   it('should handle errors and respond with a 500 status and error message', async () => {
-    // Mock the Recipes.find function to throw an error
+    
     const errorMessage = 'An error occurred while fetching recipes';
     Recipes.find = jest.fn().mockRejectedValue(new Error(errorMessage));
 
-    const req = mockRequest();
-    const res = mockResponse();
+    const req = request();
+    const res = response();
 
     await getAllRecipes(req, res);
 
@@ -111,24 +111,24 @@ describe('mealplanner', () => {
   });
 
   afterAll(() => {
-    openaiCreateStub.mockRestore();
-    UserFindOneAndUpdateStub.mockRestore();
+    openaiCreateStub.restore();
+    UserFindOneAndUpdateStub.restore();
   });
 
   it('should handle a successful response from OpenAI', async () => {
-    // Mock the OpenAI API to return a successful response
-    openaiCreateStub.mockResolvedValue({
+    
+    openaiCreateStub.resolvedValue({
       choices: [{ message: { content: 'Successful' } }],
     });
 
-    // Mock the User.findOneAndUpdate to return the updated user
-    const updatedUser = { _id: 'user_id', mealplan: { /* Updated meal plan data */ } };
-    UserFindOneUpdateStub.mockResolvedValue(updatedUser);
+    
+    const updatedUser = { _id: 'user_id', mealplan: { } };
+    UserFindOneUpdateStub.resolvedValue(updatedUser);
 
-    const req = mockRequest({
-      session: { user: { _id: 'user_id' } }, // Mock user session data
+    const req = request({
+      session: { user: { _id: 'user_id' } }, 
     });
-    const res = mockResponse();
+    const res = response();
 
     await mealplanner(req, res);
 
@@ -144,11 +144,11 @@ describe('mealplanner', () => {
   });
 
   it('should handle an error response from OpenAI', async () => {
-    // Mock the OpenAI API to return an error response
+    
     openaiCreateStub.mockRejectedValue(new Error('OpenAI API error'));
 
-    const req = mockRequest({ session: { user: { _id: 'user_id' } }});
-    const res = mockResponse();
+    const req = request({ session: { user: { _id: 'user_id' } }});
+    const res = response();
 
     await mealplanner(req, res);
 
