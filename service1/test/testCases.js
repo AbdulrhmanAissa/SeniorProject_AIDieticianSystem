@@ -57,7 +57,7 @@ describe('meal_generator', () => {
 
 const getAllRecipes = require('./getAllRecipes'); // Import your function
 const Recipes = require('./Recipes.js'); // Import your Recipes model
-const { mockRequest, mockResponse } = require('express');
+const { req, res } = require('express');
 
 describe('getAllRecipes', () => {
   it('should render recipes-page with a list of recipes', async () => {
@@ -68,8 +68,8 @@ describe('getAllRecipes', () => {
     ];
     Recipes.find = jest.fn().mockResolvedValue(sampleRecipes);
 
-    const req = mockRequest();
-    const res = mockResponse();
+    const req = request();
+    const res = response();
 
     await getAllRecipes(req, res);
 
@@ -81,7 +81,7 @@ describe('getAllRecipes', () => {
   it('should handle errors and respond with a 500 status and error message', async () => {
     
     const errorMessage = 'An error occurred while fetching recipes';
-    Recipes.find = jest.fn().mockRejectedValue(new Error(errorMessage));
+    Recipes.find = jest.fn().rejectedValue(new Error(errorMessage));
 
     const req = request();
     const res = response();
