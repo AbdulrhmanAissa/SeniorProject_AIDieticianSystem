@@ -99,7 +99,7 @@ describe('getAllRecipes', () => {
 const mealplanner = require('./mealplanner'); // Import your function
 const openai = require('./openai'); 
 const User = require('./User.js'); // Import your User model
-const { mockRequest, mockResponse } = require('express');
+const { req, res } = require('express');
 
 describe('mealplanner', () => {
   let openaiCreateStub;
