@@ -34,15 +34,6 @@ app.use(session({
 //Recipes Router
 app.get("/recipes-page", serviceController.getAllRecipes);
 
-// Search recipes by name
-app.get('/recipes-page/search', serviceController.searchRecipes);
-
-app.get('/recipes-page/tags', serviceController.getAllRecipeTags);
-
-// Filter recipes by tags
-app.post('/recipes-page/filter', serviceController.filterRecipes);
-
-
 app.get("/Dashboard", (req,res)=>{
   user = req.session.user;
   res.render("index",{user:user});
