@@ -1245,3 +1245,36 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+/* Style for the button */
+.add-water-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Style for the pop-up form */
+.water-popup {
+  display: none;
+  position: absolute;
+  background-color: #a5adaf;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Style for the close button */
+.close-button {
+  float: right;
+  cursor: pointer;
+}

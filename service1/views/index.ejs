@@ -30,7 +30,8 @@
 
                  <div class="card-body">
                   <h5 class="card-title">Calories <span>| Today</span></h5>
-
+                  <button class="add-water-button" onclick="showWaterPopup()"></button>
+                  <a href="/foodintake.ejs" class="add-water-button">+</a>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="ri-fire-line"></i>
@@ -52,6 +53,42 @@
             <div class="col-xxl-6 col-xl-12">
 
               <div class="card info-card customers-card">
+
+<!-- Adding button water -->
+
+<body>
+<!-- The "+" button -->
+<button class="add-water-button" onclick="showWaterPopup()">+</button>
+
+<!-- The pop-up form -->
+<div id="water-popup" class="water-popup">
+    <span class="close-button" onclick="closeWaterPopup()">&times;</span>
+    <h2>Enter Water Intake</h2>
+    <label for="water-amount">Amount (ml):</label>
+    <input type="number" id="water-amount">
+    <br><br>
+    <button onclick="saveWaterIntake()">Save</button>
+</div>
+
+<script>
+function showWaterPopup() {
+    document.getElementById("water-popup").style.display = "block";
+}
+
+function closeWaterPopup() {
+    document.getElementById("water-popup").style.display = "none";
+}
+
+function saveWaterIntake() {
+    var waterAmount = document.getElementById("water-amount").value;
+    alert("You drank " + waterAmount + "ml of water.");
+    closeWaterPopup();
+}
+</script>
+
+</body>
+</html>
+
              <div class="card-body">
                   <h5 class="card-title">Water <span>| Today</span></h5>
 

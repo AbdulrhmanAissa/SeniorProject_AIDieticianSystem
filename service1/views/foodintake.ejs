@@ -1,0 +1,80 @@
+<%- include("./partials/header.ejs") %>
+
+<body class="d-flex flex-column vh-100">
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="/Dashboard" class="logo d-flex align-items-center w-auto">
+                  <img src="./assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">AI Dietician System</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Add your meal</h5>
+                    <p class="text-center small">Enter your meal details</p>
+                  </div>
+
+                  <form method="post" action="/register" class="row g-3 needs-validation" novalidate>
+                    <div class="col-12">
+                      <label for="meal" class="form-label">Your Meal</label>
+                      <input type="text" name="meal" class="form-control" id="meal" pattern="[A-Za-z]+{3,25}" required>
+                      <div class="invalid-feedback">Please, enter your meal!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="protein" class="form-label">Protein</label>
+                      <input type="number" name="protein" class="form-control" id="protein" pattern="[0-9]" required>
+                      <div class="invalid-feedback">Please enter a number</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="calories" class="form-label">Calories</label>
+                      <input type="calories" name="calories" class="form-control" id="calories" pattern="[0-9]" required>
+                      <div class="invalid-feedback">Please enter a number</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="carbs" class="form-label">Carbs</label>
+                        <input type="carbs" name="carbs" class="form-control" id="carbs" pattern="[0-9]" required>
+                        <div class="invalid-feedback">Please enter a number</div>
+                      </div>
+
+                      <div class="col-12">
+                        <label for="fat" class="form-label">Fat</label>
+                        <input type="fat" name="calories" class="form-control" id="fat" pattern="[0-9]" required>
+                        <div class="invalid-feedback">Please enter a number</div>
+                      </div>
+
+           
+                </div>
+              </div>
+
+              <div class="credits">
+                Designed by <a href="">AI Dietician System</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <%- include('./partials/js.ejs')%>
+</body>
+
+</html>
