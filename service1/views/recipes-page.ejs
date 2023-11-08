@@ -53,15 +53,33 @@
           <li class="breadcrumb-item">Recipes</li>
         </ol>
       </nav>
-    </div><!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
     
     <section class="section profile">
       <div class="row justify-content-center">
-        <!-- Search Bar -->
-        <div class="search-container col-2" style="margin-bottom: 30px;">
-          <i class="fa fa-search"></i>
-          <input type="text" id="search-input" placeholder="Search..." autocomplete="off"/>
-        </div>
+
+
+    <!-- Tags and Filters -->
+
+    <!-- Search Bar -->
+    <div class="search-container col-2" style="margin-bottom: 30px;">
+      <i class="fa fa-search"></i>
+      <input type="text" id="search-input" placeholder="Search..." autocomplete="off"/>
+    </div>
+
+    <!-- Tags -->
+    <div class="tags-section">
+      <h2>Tags</h2>
+      <div class="tags-container">
+        <% tags.forEach((tag) => { %>
+          <label>
+            <input type="checkbox" class="tag-filter" value="<%= tag %>">
+            <%= tag %>
+          </label>
+        <% }); %>
+      </div>
+    </div>
 
         <br>
         <!-- Cards -->
@@ -83,6 +101,14 @@
                   <h6 id="recipeFiber">Fiber: <%= recipe.fiber %>g</h6>
                   <h6 id="recipeSugar">Sugar: <%= recipe.sugar %>g</h6>
                 </div>
+              </div>
+              <div id="recipeTags">
+                <h6>Tags:</h6>
+                <ul>
+                  <% recipe.tags.forEach((tag) => { %>
+                    <li><%= tag %></li>
+                  <% }); %>
+                </ul>
               </div>
               <p  style="text-align: center;">
                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#instructions1" role="button" aria-expanded="false" aria-controls="instructions1">Instructions</a>
@@ -110,7 +136,9 @@
           <% }) %>
         </section>
 
-  </main><!-- End #main -->
+  </main>
+  <!-- End #main -->
+  
   <%- include('./partials/footer.ejs')%>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <%- include('./partials/js.ejs')%>
@@ -119,27 +147,48 @@
 </html>
 
 <script>
-  console.log("java scriprt working!")
+  console.log("JavaScript working!");
   const searchInput = document.getElementById('search-input');
+  const tagCheckboxes = document.querySelectorAll('.tag-filter');
   const recipeCards = document.querySelectorAll('.card');
 
-  searchInput.addEventListener('input', function () {
+  function filterRecipes() {
     const searchTerm = searchInput.value.trim().toLowerCase();
+    const selectedTags = Array.from(tagCheckboxes)
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+
+    console.log('Selected Tags:', selectedTags);
 
     recipeCards.forEach((card) => {
       const recipeNameElement = card.querySelector('#recipeName');
-      
       if (recipeNameElement) {
         const recipeName = recipeNameElement.textContent.toLowerCase();
 
-        if (recipeName.includes(searchTerm)) {
+        // Get the recipe tags from the card
+        const recipeTagsList = card.querySelectorAll('#recipeTags li');
+        const recipeTags = Array.from(recipeTagsList).map((tag) => tag.textContent.toLowerCase());
+
+        const isTagMatch = selectedTags.every((tag) => recipeTags.includes(tag));
+        const isTextMatch = recipeName.includes(searchTerm);
+
+        console.log('Tag Match:', isTagMatch);
+        console.log('Text Match:', isTextMatch);
+
+        if (isTagMatch && isTextMatch) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
         }
       }
     });
+  }
+
+  searchInput.addEventListener('input', filterRecipes);
+  tagCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', filterRecipes);
   });
 
-
+  // Initial filtering when the page loads
+  filterRecipes();
 </script>

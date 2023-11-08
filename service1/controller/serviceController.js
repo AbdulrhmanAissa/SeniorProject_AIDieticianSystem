@@ -4,16 +4,22 @@ const User = require('../model/User');
 const Recipes = require('../model/Recipes');
 
 
-// Recipes Conroller
 const getAllRecipes = async (req, res) => {
-  try {
-    const recipes = await Recipes.find();
-    res.render('recipes-page.ejs', { recipes });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+   try {
+     // Retrieve all recipes
+     const recipes = await Recipes.find();
+
+     // Extract distinct tags from the retrieved recipes
+     const distinctTags = [...new Set([].concat(...recipes.map(recipe => recipe.tags)))];
+
+     // Render the recipes page with recipes and distinct tags
+     res.render('recipes-page.ejs', { recipes, tags: distinctTags });
+   } catch (err) {
+     res.status(500).json({ error: err.message });
+   }
 };
 
+ 
 const openai = new OpenAIApi.OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
