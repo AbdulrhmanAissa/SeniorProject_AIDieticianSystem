@@ -62,12 +62,13 @@
           <i class="fa fa-search"></i>
           <input type="text" id="search-input" placeholder="Search..." autocomplete="off"/>
         </div>
+
         <br>
         <!-- Cards -->
         <% recipes.forEach((recipe) => { %>
           
           <div class="card col-5" style="margin-right: 30px;">
-            <div class="container">
+            <div id="allRecipesContainer" class="container">
               <h4 id="recipeName"><b><%= recipe.name %></b></h4>
               <div class="row">
                 <div class="col">
@@ -107,7 +108,7 @@
             </div>
           </div>
           <% }) %>
-    </section>
+        </section>
 
   </main><!-- End #main -->
   <%- include('./partials/footer.ejs')%>
@@ -116,3 +117,29 @@
 </body>
 
 </html>
+
+<script>
+  console.log("java scriprt working!")
+  const searchInput = document.getElementById('search-input');
+  const recipeCards = document.querySelectorAll('.card');
+
+  searchInput.addEventListener('input', function () {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    recipeCards.forEach((card) => {
+      const recipeNameElement = card.querySelector('#recipeName');
+      
+      if (recipeNameElement) {
+        const recipeName = recipeNameElement.textContent.toLowerCase();
+
+        if (recipeName.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      }
+    });
+  });
+
+
+</script>

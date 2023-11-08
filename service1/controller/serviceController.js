@@ -14,6 +14,39 @@ const getAllRecipes = async (req, res) => {
   }
 };
 
+// Controller function to search recipes by name
+const searchRecipes = async (req, res) => {
+   try {
+     const { name } = req.query;
+     const recipes = await Recipes.find({ name: { $regex: name, $options: 'i' } });
+     res.json(recipes);
+   } catch (error) {
+     res.status(500).json({ error: 'Internal server error' });
+   }
+ };
+ 
+ // Controller function to filter recipes by tags
+ const filterRecipes = async (req, res) => {
+   try {
+     const { tags } = req.body;
+     const recipes = await Recipes.find({ tags: { $in: tags } });
+     res.json(recipes);
+   } catch (error) {
+     res.status(500).json({ error: 'Internal server error' });
+   }
+ };
+
+ // Controller function to get all unique tags from recipes
+const getAllRecipeTags = async (req, res) => {
+   try {
+     const tags = await Recipe.distinct('tags'); // Assuming 'tags' is the field containing recipe tags
+ 
+     res.json(tags);
+   } catch (error) {
+     res.status(500).json({ error: 'Failed to retrieve recipe tags.' });
+   }
+ };
+
 const openai = new OpenAIApi.OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
@@ -282,4 +315,5 @@ function floorToNearestHundred(number) {
 
 module.exports = { register_get, login_get, logout,
     register_post, login_post, myprofile_get,
-      changepass_post, editprofile_post, mealplanner, faq, meal_generator, getAllRecipes };
+      changepass_post, editprofile_post, mealplanner,faq, meal_generator,
+        getAllRecipes, searchRecipes, filterRecipes, getAllRecipeTags };
