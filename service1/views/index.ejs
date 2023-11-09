@@ -114,6 +114,36 @@ function saveWaterIntake() {
                 <div class="card-body">
                   <h5 class="card-title">Calories & Water Tracking</h5>
                   <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                  <!-- <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new Chart(document.querySelector('#lineChart'), {
+                        type: 'line',
+                        data: {
+                          labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                          datasets: [{
+                            label: 'Calories',
+                            data: [1665, 1659, 1860, 1813, 1556, 1955, 1450],
+                            fill: true,
+                            borderColor: '#ee6666',
+                            tension: 0
+                          },{
+                            label: 'Water',
+                            data: [1600,1356,1878,2321,1945,1978,1934],
+                            fill: true,
+                            borderColor: '#5470c6',
+                            tension: 0
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: false
+                            }
+                          }
+                        }
+                      });
+                    });
+                  </script> -->
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
                       new Chart(document.querySelector('#lineChart'), {
@@ -139,12 +169,37 @@ function saveWaterIntake() {
                             y: {
                               beginAtZero: false
                             }
+                          },
+                          plugins: {
+                            legend: {
+                              labels: {
+                                usePointStyle: false,
+                                font: {
+                                  size: 12,
+                                },
+                                padding: 4,
+                                boxWidth: 30, // Set the width of the legend rectangles
+                                boxHeight: 10, // Set the height of the legend rectangles
+                                generateLabels: function(chart) {
+                                  const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                  labels.forEach(label => {
+                                    if (label.text === 'Calories') {
+                                      label.fillStyle = '#ee6666'; // Color for the 'Calories' legend
+                                    } else if (label.text === 'Water') {
+                                      label.fillStyle = '#5470c6'; // Color for the 'Water' legend
+                                    }
+                                  });
+                                  return labels;
+                                }
+                              }
+                            }
                           }
                         }
                       });
                     });
                   </script>
-
+                  
+                  
                 </div>
           
               </div>
