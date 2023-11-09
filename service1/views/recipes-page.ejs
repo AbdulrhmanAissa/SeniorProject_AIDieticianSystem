@@ -69,9 +69,8 @@
     </div>
 
     <!-- Tags -->
-    <div class="tags-section">
-      <h2>Tags</h2>
-      <div class="tags-container">
+    <div class="tags-section" style="margin-bottom: 20px;">
+      <div class="tags-container" style="text-align: center;">
         <% tags.forEach((tag) => { %>
           <label>
             <input type="checkbox" class="tag-filter" value="<%= tag %>">
@@ -81,7 +80,6 @@
       </div>
     </div>
 
-        <br>
         <!-- Cards -->
         <% recipes.forEach((recipe) => { %>
           
@@ -111,8 +109,8 @@
                 </ul>
               </div>
               <p  style="text-align: center;">
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#instructions1" role="button" aria-expanded="false" aria-controls="instructions1">Instructions</a>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#ingredients1" aria-expanded="false" aria-controls="ingredients1">Ingredients</button>
+                <a class="btn" data-bs-toggle="collapse" href="#instructions1" role="button" aria-expanded="false" aria-controls="instructions1" style="background-color: #4154f1; color: white;">Instructions</a>
+                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#ingredients1" aria-expanded="false" aria-controls="ingredients1" style="background-color: #4154f1; color: white;">Ingredients</button>
               </p>
               <div class="row">
                 <div class="col">

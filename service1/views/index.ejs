@@ -20,18 +20,15 @@
     <section class="section dashboard">
       <div class="row">
 
-        <!-- Left side columns -->
-        <div class="col-lg-8">
           <div class="row">
-
             <!-- Sales Card -->
-            <div class="col-xxl-6 col-md-12">
+            <div class="col-4">
               <div class="card info-card sales-card">
 
-                 <div class="card-body">
+                <div class="card-body">
                   <h5 class="card-title">Calories <span>| Today</span></h5>
                   <button class="add-water-button" onclick="showWaterPopup()"></button>
-                  <a href="/foodintake.ejs" class="add-water-button">+</a>
+                  <a href="/foodintake.ejs" class="add-water-button" style="text-align: center; background-color: #4154f1;">+</a>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="ri-fire-line"></i>
@@ -43,73 +40,85 @@
                   </div>
                 </div>
               </div>
-
-              </div>
             </div><!-- End Sales Card -->
 
-            <!-- Revenue Card -->
-      
             <!-- Customers Card -->
-            <div class="col-xxl-6 col-xl-12">
-
+            <div class="col-4">
               <div class="card info-card customers-card">
 
-<!-- Adding button water -->
+                <!-- The "+" button for adding water -->
+                <button class="add-water-button" onclick="showWaterPopup()" style="background-color: #4154f1;">+</button>
 
-<body>
-<!-- The "+" button -->
-<button class="add-water-button" onclick="showWaterPopup()">+</button>
+                <!-- The pop-up form -->
+                <div id="water-popup" class="water-popup" style="background-color: #4154f1;">
+                    <span class="close-button" style="color: white;" onclick="closeWaterPopup()">&times;</span>
+                    <h2 style="color: white;">Enter Water Intake</h2>
+                    <label for="water-amount" style="color: white; border-radius: 50%;">Amount (ml):</label>
+                    <input type="number" id="water-amount">
+                    <br><br>
+                    <button class="btn" onclick="saveWaterIntake()" style="background-color: white;">Save</button>
+                </div>
 
-<!-- The pop-up form -->
-<div id="water-popup" class="water-popup">
-    <span class="close-button" onclick="closeWaterPopup()">&times;</span>
-    <h2>Enter Water Intake</h2>
-    <label for="water-amount">Amount (ml):</label>
-    <input type="number" id="water-amount">
-    <br><br>
-    <button onclick="saveWaterIntake()">Save</button>
-</div>
+                <script>
+                function showWaterPopup() {
+                    document.getElementById("water-popup").style.display = "block";
+                }
 
-<script>
-function showWaterPopup() {
-    document.getElementById("water-popup").style.display = "block";
-}
+                function closeWaterPopup() {
+                    document.getElementById("water-popup").style.display = "none";
+                }
 
-function closeWaterPopup() {
-    document.getElementById("water-popup").style.display = "none";
-}
+                function saveWaterIntake() {
+                    var waterAmount = document.getElementById("water-amount").value;
+                    alert("You drank " + waterAmount + "ml of water.");
+                    closeWaterPopup();
+                }
+                </script>
 
-function saveWaterIntake() {
-    var waterAmount = document.getElementById("water-amount").value;
-    alert("You drank " + waterAmount + "ml of water.");
-    closeWaterPopup();
-}
-</script>
+                  <div class="card-body">
+                      <h5 class="card-title">Water <span>| Today</span></h5>
 
-</body>
-</html>
+                      <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-droplet-half"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>1.3 L</h6>
+                          <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
-             <div class="card-body">
-                  <h5 class="card-title">Water <span>| Today</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-droplet-half"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>1.3 L</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                        </div>
+                      </div>
 
                     </div>
                   </div>
 
+              </div><!-- End Customers Card -->
+            </div>
+          </div>
+          <div class="row">
+
+            <!-- Right side columns -->
+            <div class="col-lg-6">
+              <div class="card basic" style="min-height: 95.5%;">
+                <div class="card-body">
+                  <h5 class="card-title">5 Steps To Success</h5>
+                  <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">1. Visualize Success:</p> 
+                  <p style="text-align: justify; font-family: Poppins, sans-serif;">Picture how achieving your goals will improve your life.</p>
+                  <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">2. Track Progress:</p>
+                  <p style="text-align: justify; font-family: Poppins, sans-serif;">Document your journey to see your achievements.</p>
+                  <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">3. Stay Consistent:</p>
+                  <p style="text-align: justify; font-family: Poppins, sans-serif;">Every healthy meal is a step toward success.</p>
+                  <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">4. Stay Positive:</p>
+                  <p style="text-align: justify; font-family: Poppins, sans-serif;">Use self-affirmations to boost confidence.</p>
+                  <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">5. Believe in Yourself:</p>
+                  <p style="text-align: justify; font-family: Poppins, sans-serif;">Trust your ability to make positive choices.</p>
+                  <p style="text-align: justify; color: #012970; font-family: Poppins, sans-serif;">Remember, you have the strength to stick to your meal plan and reach your goals. Keep going! 💪🥗🌟</p>
                 </div>
               </div>
-
-            </div><!-- End Customers Card -->
+            </div>
 
             <!-- Reports -->
-            <div class="col-12">
+            <div class="col-6">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Calories & Water Tracking</h5>
@@ -205,55 +214,38 @@ function saveWaterIntake() {
               </div>
             </div><!-- End Reports -->
 
-            
           </div>
-        </div><!-- End Left side columns -->
 
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-          <div class="card basic" style="min-height: 95.5%;">
-            <div class="card-body">
-              <h5 class="card-title">5 Steps To Success</h5>
-              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">1. Visualize Success:</p> 
-              <p style="text-align: justify; font-family: Poppins, sans-serif;">Picture how achieving your goals will improve your life.</p>
-              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">2. Track Progress:</p>
-              <p style="text-align: justify; font-family: Poppins, sans-serif;">Document your journey to see your achievements.</p>
-              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">3. Stay Consistent:</p>
-              <p style="text-align: justify; font-family: Poppins, sans-serif;">Every healthy meal is a step toward success.</p>
-              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">4. Stay Positive:</p>
-              <p style="text-align: justify; font-family: Poppins, sans-serif;">Use self-affirmations to boost confidence.</p>
-              <p style="margin-bottom: 0; color: #012970; font-family: Poppins, sans-serif;">5. Believe in Yourself:</p>
-              <p style="text-align: justify; font-family: Poppins, sans-serif;">Trust your ability to make positive choices.</p>
-              <p style="text-align: justify; color: #012970; font-family: Poppins, sans-serif;">Remember, you have the strength to stick to your meal plan and reach your goals. Keep going! 💪🥗🌟</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12">
-        <div class="row">
-          
-          <div class="col-xxl-4 col-md-4">
-            <div class="card info-card protein-card">
+          <!-- User Data Cards -->
+          <div class="col-12">
+            <div class="row">
+              
+              <!-- Carbs Card -->
+              <div class="col-4">
+                <div class="card info-card protein-card">
 
-               <div class="card-body">
-                <h5 class="card-title">Protein <span>| Today</span></h5>
+                  <div class="card-body">
+                    <h5 class="card-title">Protein <span>| Today</span></h5>
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-lightning-charge"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>65 g</h6>
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-lightning-charge"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>65 g</h6>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-              <div class="col-xxl-4 col-md-4">
+
+              <!-- Carbs Card -->
+              <div class="col-4">
                 <div class="card info-card carb-card">
-  
-                   <div class="card-body">
+      
+                  <div class="card-body">
                     <h5 class="card-title">Carbs <span>| Today</span></h5>
-  
+      
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="ri-seedling-line"></i>
@@ -263,15 +255,17 @@ function saveWaterIntake() {
                       </div>
                     </div>
                   </div>
-  
+      
                 </div>
               </div>
-              <div class="col-xxl-4 col-md-4">
+              
+              <!-- Fat Card -->
+              <div class="col-4">
                 <div class="card info-card fat-card">
-  
-                   <div class="card-body">
+      
+                  <div class="card-body">
                     <h5 class="card-title">Fat <span>| Today</span></h5>
-  
+      
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-egg-fried"></i>
@@ -281,13 +275,13 @@ function saveWaterIntake() {
                       </div>
                     </div>
                   </div>
-  
+      
                 </div>
               </div>
 
             </div>
           </div>
-        </div>
+      </div>
     </section>
     
 
