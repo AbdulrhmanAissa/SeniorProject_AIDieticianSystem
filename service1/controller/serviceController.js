@@ -283,8 +283,6 @@ function floorToNearestHundred(number) {
    return Math.floor(number / 100) * 100;
 }
 
-// const totalCalories = calculateHarrisBenedictTotalCalories(bmr, activityLevel);
-
 
 module.exports = { register_get, login_get, logout,
     register_post, login_post, myprofile_get,

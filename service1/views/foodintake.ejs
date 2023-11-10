@@ -21,13 +21,20 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Generate Your Own Meal Plan</h5>
+                    <a href="../mealplanner" class="btn w-100" style="background-color: #4154f1; color: white;" type="submit">Generate Meal Plan</a>
+                  </div>
+
+                  <h5 class="card-title text-center pb-0 fs-4">Or</h5>
+
+                  <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Add your meal</h5>
                     <p class="text-center small">Enter your meal details</p>
                   </div>
 
                   <form method="post" action="/register" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
-                      <label for="meal" class="form-label">Your Meal</label>
+                      <label for="meal" class="form-label">Your Meal Name</label>
                       <input type="text" name="meal" class="form-control" id="meal" pattern="[A-Za-z]+{3,25}" required>
                       <div class="invalid-feedback">Please, enter your meal!</div>
                     </div>
@@ -40,22 +47,25 @@
 
                     <div class="col-12">
                       <label for="calories" class="form-label">Calories</label>
-                      <input type="calories" name="calories" class="form-control" id="calories" pattern="[0-9]" required>
+                      <input type="number" name="calories" class="form-control" id="calories" pattern="[0-9]" required>
                       <div class="invalid-feedback">Please enter a number</div>
                     </div>
 
                     <div class="col-12">
-                        <label for="carbs" class="form-label">Carbs</label>
-                        <input type="carbs" name="carbs" class="form-control" id="carbs" pattern="[0-9]" required>
-                        <div class="invalid-feedback">Please enter a number</div>
-                      </div>
+                      <label for="carbs" class="form-label">Carbs</label>
+                      <input type="number" name="carbs" class="form-control" id="carbs" pattern="[0-9]" required>
+                      <div class="invalid-feedback">Please enter a number</div>
+                    </div>
 
-                      <div class="col-12">
-                        <label for="fat" class="form-label">Fat</label>
-                        <input type="fat" name="calories" class="form-control" id="fat" pattern="[0-9]" required>
-                        <div class="invalid-feedback">Please enter a number</div>
-                      </div>
+                    <div class="col-12">
+                      <label for="fat" class="form-label">Fat</label>
+                      <input type="number" name="fat" class="form-control" id="fat" pattern="[0-9]" required>
+                      <div class="invalid-feedback">Please enter a number</div>
+                    </div>
 
+                    <div class="col-12">
+                      <button class="btn w-100" style="background-color: #4154f1; color: white;" type="submit">Add</button>
+                    </div>
            
                 </div>
               </div>
