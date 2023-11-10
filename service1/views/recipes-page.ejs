@@ -63,36 +63,51 @@
     <section class="section profile">
       <div class="row justify-content-center">
 
+      <div class="card col-11">
 
-    <!-- Tags and Filters -->
+        <div class="card-body" style="text-align: center;">
+          <!-- Tags and Filters -->
 
-    <!-- Search Bar -->
-    <div class="search-container col-2" style="margin-bottom: 30px;">
-      <i class="fa fa-search"></i>
-      <input type="text" id="search-input" placeholder="Search..." autocomplete="off"/>
-    </div>
+          <!-- Search Bar -->
+          <div class="search-container col-2 d-flex" style="margin-bottom: 20px; margin-left: auto; margin-right: auto; margin-top: 20px;">
+            <i class="fa fa-search"></i>
+            <input type="text" id="search-input" placeholder="Search..." autocomplete="off"/>
+          </div>
 
-    <!-- Tags -->
-      <div class="tags-section">
-        <h2>Tags</h2>
-        <div class="tags-container">
-          <% tags.forEach((tag) => { %>
-            <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input tag-filter" id="tag<%= tag %>" value="<%= tag %>">
-              <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
+          <!-- Filters Button -->
+          <p>
+            <a class="btn btn-primary" style="background-color: #4154f1; color: white;" data-bs-toggle="collapse" href="#tagsCollapse" role="button" aria-expanded="false" aria-controls="tagsCollapse">
+              Recipes Filter
+            </a>
+          </p>
+          <div class="collapse" id="tagsCollapse">
+            <div class="card card-body">
+              
+              <!-- Tags -->
+              <div class="tags-section" style="padding-bottom: 5px; text-align: center; margin-left: auto; margin-right: auto;">
+                <div class="tags-container">
+                  <% tags.forEach((tag) => { %>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input tag-filter" id="tag<%= tag %>" value="<%= tag %>">
+                      <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
+                    </div>
+                  <% }); %>
+                </div>
+              </div>
+              
             </div>
-          <% }); %>
+          </div>
+
         </div>
       </div>
-
-        <br>
+        
       <!-- Cards -->
       <% recipes.forEach((recipe, index) => { %>
 
-        <div class="card col-5" style="margin-right: 30px; padding: 30px;">
+        <div class="card col-5" style="padding-top: 10px; margin-right: auto; margin-left: auto; padding-bottom: 5px;">
           <div id="allRecipesContainer" class="container">
-            <h4 id="recipeName"><b><%= recipe.name %></b></h4>
-            <div class="row">
+            <h4 id="recipeName" style="text-align: center; padding-bottom: 10px;"><b><%= recipe.name %></b></h4>
+            <div class="row" style="text-align: center; margin-bottom: 15px;">
               <div class="col">
                 <h6 id="recipeCalories">Calories: <%= recipe.calories %> cal</h6>
                 <h6 id="recipeFat">Fat: <%= recipe.fat %>g</h6>
@@ -106,17 +121,10 @@
                 <h6 id="recipeSugar">Sugar: <%= recipe.sugar %>g</h6>
               </div>
             </div>
-            <div id="recipeTags">
-              <h6>Tags:</h6>
-              <ul>
-                <% recipe.tags.forEach((tag) => { %>
-                  <li><%= tag %></li>
-                <% }); %>
-              </ul>
-            </div>
+
             <p style="text-align: center;">
-              <a class="btn btn-primary" data-bs-toggle="collapse" href="#instructions<%= index %>" role="button" aria-expanded="false" aria-controls="instructions<%= index %>">Instructions</a>
-              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#ingredients<%= index %>" aria-expanded="false" aria-controls="ingredients<%= index %>">Ingredients</button>
+              <a class="btn btn-primary" style="background-color: #4154f1; color: white;" data-bs-toggle="collapse" href="#instructions<%= index %>" role="button" aria-expanded="false" aria-controls="instructions<%= index %>">Instructions</a>
+              <button class="btn btn-primary" style="background-color: #4154f1; color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#ingredients<%= index %>" aria-expanded="false" aria-controls="ingredients<%= index %>">Ingredients</button>
             </p>
             <div class="row">
               <div class="col">
@@ -136,6 +144,16 @@
                 </div>
               </div>
             </div>
+
+            <div id="recipeTags" style="opacity: 0; font-size: 0px;">
+            
+              <ul>
+                <% recipe.tags.forEach((tag) => { %>
+                  <li><%= tag %></li>
+                <% }); %>
+              </ul>
+            </div>
+
           </div>
         </div>
       <% }) %>
