@@ -2,6 +2,10 @@
 
 <style>
 
+   .tags-section {
+    padding-bottom: 50px;
+  }
+
 .search-container{
   position: relative;
   height: 45px;
@@ -69,72 +73,73 @@
     </div>
 
     <!-- Tags -->
-    <div class="tags-section">
-      <h2>Tags</h2>
-      <div class="tags-container">
-        <% tags.forEach((tag) => { %>
-          <label>
-            <input type="checkbox" class="tag-filter" value="<%= tag %>">
-            <%= tag %>
-          </label>
-        <% }); %>
+      <div class="tags-section">
+        <h2>Tags</h2>
+        <div class="tags-container">
+          <% tags.forEach((tag) => { %>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input tag-filter" id="tag<%= tag %>" value="<%= tag %>">
+              <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
+            </div>
+          <% }); %>
+        </div>
       </div>
-    </div>
 
         <br>
-        <!-- Cards -->
-        <% recipes.forEach((recipe) => { %>
-          
-          <div class="card col-5" style="margin-right: 30px;">
-            <div id="allRecipesContainer" class="container">
-              <h4 id="recipeName"><b><%= recipe.name %></b></h4>
-              <div class="row">
-                <div class="col">
-                  <h6 id="recipeCalories">Calories: <%= recipe.calories %> cal</h6>
-                  <h6 id="recipeFat">Fat: <%= recipe.fat %>g</h6>
-                  <h6 id="recipeSatFat">Saturated Fat: <%= recipe.satfat %>g</h6>
-                  <h6 id="recipeProtien">Protein: <%= recipe.protein %>g</h6>
-                </div>
-              
-                <div class="col">
-                  <h6 id="recipeCarbs">Carbohydrates: <%= recipe.carbs %>g</h6>
-                  <h6 id="recipeFiber">Fiber: <%= recipe.fiber %>g</h6>
-                  <h6 id="recipeSugar">Sugar: <%= recipe.sugar %>g</h6>
-                </div>
+      <!-- Cards -->
+      <% recipes.forEach((recipe, index) => { %>
+
+        <div class="card col-5" style="margin-right: 30px; padding: 30px;">
+          <div id="allRecipesContainer" class="container">
+            <h4 id="recipeName"><b><%= recipe.name %></b></h4>
+            <div class="row">
+              <div class="col">
+                <h6 id="recipeCalories">Calories: <%= recipe.calories %> cal</h6>
+                <h6 id="recipeFat">Fat: <%= recipe.fat %>g</h6>
+                <h6 id="recipeSatFat">Saturated Fat: <%= recipe.satfat %>g</h6>
+                <h6 id="recipeProtien">Protein: <%= recipe.protein %>g</h6>
               </div>
-              <div id="recipeTags">
-                <h6>Tags:</h6>
-                <ul>
-                  <% recipe.tags.forEach((tag) => { %>
-                    <li><%= tag %></li>
-                  <% }); %>
-                </ul>
+            
+              <div class="col">
+                <h6 id="recipeCarbs">Carbohydrates: <%= recipe.carbs %>g</h6>
+                <h6 id="recipeFiber">Fiber: <%= recipe.fiber %>g</h6>
+                <h6 id="recipeSugar">Sugar: <%= recipe.sugar %>g</h6>
               </div>
-              <p  style="text-align: center;">
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#instructions1" role="button" aria-expanded="false" aria-controls="instructions1">Instructions</a>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#ingredients1" aria-expanded="false" aria-controls="ingredients1">Ingredients</button>
-              </p>
-              <div class="row">
-                <div class="col">
-                  <div class="collapse multi-collapse" id="instructions1">
-                    <div class="card card-body">
-                      <%= recipe.instructions %>
-                    </div>
+            </div>
+            <div id="recipeTags">
+              <h6>Tags:</h6>
+              <ul>
+                <% recipe.tags.forEach((tag) => { %>
+                  <li><%= tag %></li>
+                <% }); %>
+              </ul>
+            </div>
+            <p style="text-align: center;">
+              <a class="btn btn-primary" data-bs-toggle="collapse" href="#instructions<%= index %>" role="button" aria-expanded="false" aria-controls="instructions<%= index %>">Instructions</a>
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#ingredients<%= index %>" aria-expanded="false" aria-controls="ingredients<%= index %>">Ingredients</button>
+            </p>
+            <div class="row">
+              <div class="col">
+                <div class="collapse multi-collapse" id="instructions<%= index %>">
+                  <div class="card card-body">
+                    <%= recipe.instructions %>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="collapse multi-collapse" id="ingredients1">
-                    <div class="card card-body">
-                      <% recipe.ingredients.forEach((ingredient) => { %>
-                        <li><%= ingredient %></li>
-                      <% }); %>                    </div>
+              </div>
+              <div class="col">
+                <div class="collapse multi-collapse" id="ingredients<%= index %>">
+                  <div class="card card-body">
+                    <% recipe.ingredients.forEach((ingredient, i) => { %>
+                      <li><%= ingredient %></li>
+                    <% }); %>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <% }) %>
-        </section>
+        </div>
+      <% }) %>
+      </section>
 
   </main>
   <!-- End #main -->
