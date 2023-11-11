@@ -158,4 +158,101 @@ describe('mealplanner', () => {
 });
 
 
+//Water Tracker 
+
+const { mockRequest, mockResponse } = require('express');
+
+const waterTrackerModule = require('./serviceController');
+
+describe('watertracker', () => {
+  it('updates user macrotracking for the current day', async () => {
+    // The user object and the User model
+    const mockUser = {
+      _id: 'user._id',
+      macrotracking: [
+        { day: 'Sunday', data: [{ water: 50 }], datetime: new Date() },
+        // ... other days
+      ],
+    };
+
+    const mockUserModel = {
+      findByIdAndUpdate: jest.fn().mockReturnValueOnce({ user: user._id }),
+    };
+
+    // The request and response objects
+    const req = request({
+      session: { user: user._id },
+      body: { wateramount: '20' },
+    });
+
+    const res = response();
+
+    // Setting the Date to a known day
+    jest.spyOn(global, 'Date').setDay(() => new Date('2023-11-11T12:00:00Z'));
+
+    // Calling the watertracker method
+    await waterTrackerModule.watertracker(req, res, userModel);
+
+    // Expectation
+    expect(userModel.findByIdAndUpdate).toHaveBeenCalledWith(
+      { _id: 'user._id' },
+      {
+        macrotracking: [
+          { day: 'Sunday', data: [{ water: 70 }], datetime: expect.any(Date) },
+          // ... other days
+        ],
+      },
+      { returnOriginal: false }
+    );
+
+    expect(res.redirect).toHaveBeenCalledWith('/Dashboard');
+
+    // Restoring the Date object to its original implementation
+    global.Date.mockRestore();
+  });
+});
+
+// Recipes Filter 
+
+const recipes = require('./recipes');
+
+describe('filterRecipes', () => {
+  beforeEach(() => {
+    // Set up a basic HTML structure with a search input, checkboxes, and recipe cards
+    document.body.innerHTML = `
+      <input id="searchInput" value="" />
+      <input type="checkbox" class="tagCheckbox" value="tag1" />
+      <input type="checkbox" class="tagCheckbox" value="tag2" />
+      <div class="recipeCard" style="display: block;">
+        <span id="recipeName">Recipe 1</span>
+        <ul id="recipeTags">
+          <li>tag1</li>
+          <li>tag2</li>
+        </ul>
+      </div>
+      <div class="recipeCard" style="display: block;">
+        <span id="recipeName">Recipe 2</span>
+        <ul id="recipeTags">
+          <li>tag1</li>
+        </ul>
+      </div>
+    `;
+  });
+
+  it('filters recipes based on search term and selected tags', () => {
+    // Console.log method to capture the output
+    const consoleSpy = jest.spyOn(console, 'log').implementation();
+
+    // Trigger the filterRecipes function
+    recipes.filterRecipes();
+
+    // Expectations based on the provided HTML structure
+    expect(consoleSpy).toHaveBeenCalledWith('Selected Tags:', ['tag1']);
+    expect(consoleSpy).toHaveBeenCalledWith('Tag Match:', true);
+    expect(consoleSpy).toHaveBeenCalledWith('Text Match:', true);
+
+    // Restore the original console.log method
+    consoleSpy.restore();
+  });
+});
 
