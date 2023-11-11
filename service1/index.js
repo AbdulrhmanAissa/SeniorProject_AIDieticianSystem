@@ -195,6 +195,7 @@ app.post("/login", serviceController.login_post);
 app.post("/register", serviceController.register_post);
 app.post("/changepass", serviceController.changepass_post);
 app.post("/editprofile", serviceController.editprofile_post);
+app.post("/Waterintake", serviceController.watertracker);
 
 app.use((request, response) => {
     response.status(404).render('pages-error-404');

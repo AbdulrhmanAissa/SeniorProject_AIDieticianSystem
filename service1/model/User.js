@@ -14,7 +14,8 @@ let userSchema = new mongoose.Schema({
   glutenFree: {type: Boolean},
   healthgoal: {type: String},
   password: {type: String},
-  mealplan: {type: Object}
+  mealplan: {type: Object},
+  macrotracking: {type: Object}
 });
 
 module.exports = mongoose.model('User', userSchema);

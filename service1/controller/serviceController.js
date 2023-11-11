@@ -44,6 +44,58 @@ const register_post = async (req, res) => {
    }
  
    const hasdPsw = await bcrypt.hash(password, 12);
+
+   const MacroTracking = [
+      {
+        day: 'Monday',
+        data: [
+          { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
+        ],
+        datetime : new Date()
+      },
+      {
+        day: 'Tuesday',
+        data: [
+          { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
+        ],
+        datetime : new Date()
+      },
+      {
+        day: 'Wednesday',
+        data: [
+          { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
+        ],
+        datetime : new Date()
+      },
+      {
+        day: 'Thursday',
+        data: [
+          { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
+        ],
+        datetime : new Date()
+      },
+      {
+        day: 'Friday',
+        data: [
+          { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
+        ],
+        datetime : new Date()
+      },
+      {
+        day: 'Saturday',
+        data: [
+          { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
+        ],
+        datetime : new Date()
+      },
+      {
+        day: 'Sunday',
+        data: [
+          { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
+        ],
+        datetime : new Date()
+      }
+    ];
  
    user = new User({name: name,
                    email: email,
@@ -57,11 +109,13 @@ const register_post = async (req, res) => {
                    vegan: vegan,
                    glutenFree: glutenFree,
                    healthgoal: healthgoal,
-                   password: hasdPsw});
+                   password: hasdPsw,
+                   macrotracking: MacroTracking});
  
    await user.save();
    req.session.isAuth = true;
    req.session.user = user;
+
    res.redirect("/myprofile");
 };
 
@@ -283,8 +337,30 @@ function floorToNearestHundred(number) {
    return Math.floor(number / 100) * 100;
 }
 
+const watertracker = async (req,res) => {
+   user = req.session.user;
+   const wateramount = req.body.wateramount;
+   const date = new Date();
+   const dayOfWeek = date.getDay();
+   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+   const dayName = days[dayOfWeek];
+
+   macrotracking = user.macrotracking;
+   for (let i = 0; i <= 6; i++) {
+      if(macrotracking[i].day == dayName){
+         macrotracking[i].data[0].water += parseInt(wateramount);
+         macrotracking[i].datetime = new Date();
+
+         console.log(macrotracking[i].data[0].water);
+      }
+   }
+   newuser = await User.findByIdAndUpdate({_id: user._id},{macrotracking: macrotracking},{returnOriginal: false});
+   console.log(macrotracking);
+
+   res.redirect('/Dashboard');
+}
 
 module.exports = { register_get, login_get, logout,
     register_post, login_post, myprofile_get,
       changepass_post, editprofile_post, mealplanner,faq, meal_generator,
-        getAllRecipes};
+        getAllRecipes, watertracker};
