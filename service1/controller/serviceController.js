@@ -45,55 +45,63 @@ const register_post = async (req, res) => {
  
    const hasdPsw = await bcrypt.hash(password, 12);
 
+   let day0 = new Date();
+   let day1 = new Date(day0.setDate(day0.getDate() + 1));
+   let day2 = new Date(day1.setDate(day1.getDate() + 1));
+   let day3 = new Date(day2.setDate(day2.getDate() + 1));
+   let day4 = new Date(day3.setDate(day3.getDate() + 1));
+   let day5 = new Date(day4.setDate(day4.getDate() + 1));
+   let day6 = new Date(day5.setDate(day5.getDate() + 1));
+
    const MacroTracking = [
       {
         day: 'Monday',
         data: [
           { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
         ],
-        datetime : new Date()
+        datetime : day0
       },
       {
         day: 'Tuesday',
         data: [
           { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
         ],
-        datetime : new Date()
+        datetime : day1
       },
       {
         day: 'Wednesday',
         data: [
           { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
         ],
-        datetime : new Date()
+        datetime : day2
       },
       {
         day: 'Thursday',
         data: [
           { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
         ],
-        datetime : new Date()
+        datetime : day3
       },
       {
         day: 'Friday',
         data: [
           { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
         ],
-        datetime : new Date()
+        datetime : day4
       },
       {
         day: 'Saturday',
         data: [
           { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
         ],
-        datetime : new Date()
+        datetime : day5
       },
       {
         day: 'Sunday',
         data: [
           { calories: 0, fat: 0, protein: 0, carbs: 0, water: 0}
         ],
-        datetime : new Date()
+        datetime : day6
       }
     ];
  
@@ -340,6 +348,7 @@ function floorToNearestHundred(number) {
 const watertracker = async (req,res) => {
    user = req.session.user;
    const wateramount = req.body.wateramount;
+   console.log(wateramount);
    const date = new Date();
    const dayOfWeek = date.getDay();
    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -347,20 +356,183 @@ const watertracker = async (req,res) => {
 
    macrotracking = user.macrotracking;
    for (let i = 0; i <= 6; i++) {
+      
       if(macrotracking[i].day == dayName){
+         if((date - macrotracking[i].datetime) > 86400000){
+         macrotracking[i].data[0].water = parseInt(0);
+         console.log(1);
+         }
          macrotracking[i].data[0].water += parseInt(wateramount);
          macrotracking[i].datetime = new Date();
-
-         console.log(macrotracking[i].data[0].water);
+         console.log(2);
       }
    }
    newuser = await User.findByIdAndUpdate({_id: user._id},{macrotracking: macrotracking},{returnOriginal: false});
-   console.log(macrotracking);
+   req.session.user = newuser;
 
    res.redirect('/Dashboard');
+}
+
+const mealplanmacrotracker = async (req,res) => {
+   user = req.session.user;
+   const {Breakfast,SnackOne,Lunch,SnackTwo,Dinner} = req.body;
+   const date = new Date();
+   const dayOfWeek = date.getDay();
+   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+   const dayName = days[dayOfWeek];
+
+   if(Breakfast !== undefined){
+      const BreakfastMacronutrients = user.mealplan.BreakfastMacronutrients;
+      macrotracking = user.macrotracking;
+
+      for (let i = 0; i <= 6; i++) {
+         
+
+         if(macrotracking[i].day == dayName){
+            if((date - macrotracking[i].datetime) > 86400000){
+            macrotracking[i].data[0].protein = parseInt(0);
+            macrotracking[i].data[0].carbs = parseInt(0);
+            macrotracking[i].data[0].fat = parseInt(0);
+            macrotracking[i].data[0].calories = parseInt(0);
+            }
+            macrotracking[i].data[0].protein += parseInt(BreakfastMacronutrients.Proteins);
+            macrotracking[i].data[0].carbs += parseInt(BreakfastMacronutrients.Carbs);
+            macrotracking[i].data[0].fat += parseInt(BreakfastMacronutrients.Fat);
+            macrotracking[i].data[0].calories += parseInt(BreakfastMacronutrients.Calories);
+            macrotracking[i].datetime = new Date();
+         }
+      }
+   }
+   if(SnackOne !== undefined){
+      const SnackOneMacronutrients = user.mealplan.SnackOneMacronutrients;
+      macrotracking = user.macrotracking;
+
+      for (let i = 0; i <= 6; i++) {
+         
+         if(macrotracking[i].day == dayName){
+            if((date - macrotracking[i].datetime) > 86400000){
+            macrotracking[i].data[0].protein = parseInt(0);
+            macrotracking[i].data[0].carbs = parseInt(0);
+            macrotracking[i].data[0].fat = parseInt(0);
+            macrotracking[i].data[0].calories = parseInt(0);
+            }
+            macrotracking[i].data[0].protein += parseInt(SnackOneMacronutrients.Proteins);
+            macrotracking[i].data[0].carbs += parseInt(SnackOneMacronutrients.Carbs);
+            macrotracking[i].data[0].fat += parseInt(SnackOneMacronutrients.Fat);
+            macrotracking[i].data[0].calories += parseInt(SnackOneMacronutrients.Calories);
+            macrotracking[i].datetime = new Date();
+         }
+      }
+   }
+   if(Lunch !== undefined){
+      const LunchMacronutrients = user.mealplan.LunchMacronutrients;
+      macrotracking = user.macrotracking;
+
+      for (let i = 0; i <= 6; i++) {
+         if(macrotracking[i].day == dayName){
+            if((date - macrotracking[i].datetime) > 86400000){
+               macrotracking[i].data[0].protein = parseInt(0);
+               macrotracking[i].data[0].carbs = parseInt(0);
+               macrotracking[i].data[0].fat = parseInt(0);
+               macrotracking[i].data[0].calories = parseInt(0);
+            }
+            macrotracking[i].data[0].protein += parseInt(LunchMacronutrients.Proteins);
+            macrotracking[i].data[0].carbs += parseInt(LunchMacronutrients.Carbs);
+            macrotracking[i].data[0].fat += parseInt(LunchMacronutrients.Fat);
+            macrotracking[i].data[0].calories += parseInt(LunchMacronutrients.Calories);
+            macrotracking[i].datetime = new Date();
+         }
+      }
+   }
+   if(SnackTwo !== undefined){
+      const SnackTwoMacronutrients = user.mealplan.SnackTwoMacronutrients;
+      macrotracking = user.macrotracking;
+
+      for (let i = 0; i <= 6; i++) {
+         if(macrotracking[i].day == dayName){
+            if((date - macrotracking[i].datetime) > 86400000){
+               macrotracking[i].data[0].protein = parseInt(0);
+               macrotracking[i].data[0].carbs = parseInt(0);
+               macrotracking[i].data[0].fat = parseInt(0);
+               macrotracking[i].data[0].calories = parseInt(0);
+            }
+            macrotracking[i].data[0].protein += parseInt(SnackTwoMacronutrients.Proteins);
+            macrotracking[i].data[0].carbs += parseInt(SnackTwoMacronutrients.Carbs);
+            macrotracking[i].data[0].fat += parseInt(SnackTwoMacronutrients.Fat);
+            macrotracking[i].data[0].calories += parseInt(SnackTwoMacronutrients.Calories);
+            macrotracking[i].datetime = new Date();
+         }
+      }
+   }
+   if(Dinner !== undefined){
+      const DinnerMacronutrients = user.mealplan.DinnerMacronutrients;
+      macrotracking = user.macrotracking;
+
+      for (let i = 0; i <= 6; i++) {
+         if(macrotracking[i].day == dayName){
+            if((date - macrotracking[i].datetime) > 86400000){
+               macrotracking[i].data[0].protein = parseInt(0);
+               macrotracking[i].data[0].carbs = parseInt(0);
+               macrotracking[i].data[0].fat = parseInt(0);
+               macrotracking[i].data[0].calories = parseInt(0);
+            }
+            macrotracking[i].data[0].protein += parseInt(DinnerMacronutrients.Proteins);
+            macrotracking[i].data[0].carbs += parseInt(DinnerMacronutrients.Carbs);
+            macrotracking[i].data[0].fat += parseInt(DinnerMacronutrients.Fat);
+            macrotracking[i].data[0].calories += parseInt(DinnerMacronutrients.Calories);
+            macrotracking[i].datetime = new Date();
+         }
+      }
+   }
+   newuser = await User.findByIdAndUpdate({_id: user._id},{macrotracking: macrotracking},{returnOriginal: false});
+   req.session.user = newuser;
+   res.redirect('/Dashboard');
+}
+
+const manualmacrotracker = async (req,res) => {
+   user = req.session.user;
+   const {meal,calories,protein,carbs,fat} = req.body;
+   const date = new Date();
+   const dayOfWeek = date.getDay();
+   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+   const dayName = days[dayOfWeek];
+
+   macrotracking = user.macrotracking;
+
+   for (let i = 0; i <= 6; i++) {
+      if(macrotracking[i].day == dayName){
+         if((date - macrotracking[i].datetime) > 86400000){
+         macrotracking[i].data[0].protein = parseInt(0);
+         macrotracking[i].data[0].carbs = parseInt(0);
+         macrotracking[i].data[0].fat = parseInt(0);
+         macrotracking[i].data[0].calories = parseInt(0);
+         }
+         macrotracking[i].data[0].protein += parseInt(protein);
+         macrotracking[i].data[0].carbs += parseInt(carbs);
+         macrotracking[i].data[0].fat += parseInt(fat);
+         macrotracking[i].data[0].calories += parseInt(calories);
+         macrotracking[i].datetime = new Date();
+      }
+   }
+   newuser = await User.findByIdAndUpdate({_id: user._id},{macrotracking: macrotracking},{returnOriginal: false});
+   req.session.user = newuser;
+   res.redirect('/Dashboard');
+}
+
+const dashboard_get = async (req,res) => {
+   email = req.session.user.email;
+   const user = await User.findOne({email});
+
+   if (!user) {
+      return res.redirect("/login");
+   }
+
+   req.session.user = user;
+   res.render('index',{user: user});
 }
 
 module.exports = { register_get, login_get, logout,
     register_post, login_post, myprofile_get,
       changepass_post, editprofile_post, mealplanner,faq, meal_generator,
-        getAllRecipes, watertracker};
+        getAllRecipes, watertracker, mealplanmacrotracker, dashboard_get, 
+        manualmacrotracker};

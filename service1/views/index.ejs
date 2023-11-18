@@ -34,7 +34,15 @@
                       <i class="ri-fire-line"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>2390 kcal</h6>
+                      <% if(user.macrotracking){ %>
+                        <% const today = new Date(); %>
+                         <% user.macrotracking.filter(item => {
+                             const itemDate = new Date(item.datetime);
+                             return itemDate.toDateString() === today.toDateString();
+                           }).forEach(item => { %>
+                           <h6><%= item.data[0].calories %> kcal</h6>
+                         <% }); %>
+                     <% }; %>
                     </div>
                   </div>
                 </div>
@@ -81,8 +89,8 @@
                               <% user.macrotracking.filter(item => {
                                   const itemDate = new Date(item.datetime);
                                   return itemDate.toDateString() === today.toDateString();
-                              }).forEach(item => { %>
-                                <h6><%= item.data[0].water %> ml</h6>
+                                }).forEach(item => { %>
+                                <h6><%= item.data[0].water %> ml </h6>
                               <% }); %>
                           <% }; %>
                         </div>
@@ -192,7 +200,15 @@
                         <i class="bi bi-lightning-charge"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>65 g</h6>
+                        <% if(user.macrotracking){ %>
+                          <% const today = new Date(); %>
+                           <% user.macrotracking.filter(item => {
+                               const itemDate = new Date(item.datetime);
+                               return itemDate.toDateString() === today.toDateString();
+                             }).forEach(item => { %>
+                             <h6><%= item.data[0].protein %> g</h6>
+                           <% }); %>
+                       <% }; %>
                       </div>
                     </div>
                   </div>
@@ -211,7 +227,15 @@
                         <i class="ri-seedling-line"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>78 g</h6>
+                        <% if(user.macrotracking){ %>
+                          <% const today = new Date(); %>
+                           <% user.macrotracking.filter(item => {
+                               const itemDate = new Date(item.datetime);
+                               return itemDate.toDateString() === today.toDateString();
+                             }).forEach(item => { %>
+                             <h6><%= item.data[0].carbs %> g</h6>
+                           <% }); %>
+                       <% }; %>
                       </div>
                     </div>
                   </div>
@@ -231,7 +255,15 @@
                         <i class="bi bi-egg-fried"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>43 g</h6>
+                        <% if(user.macrotracking){ %>
+                          <% const today = new Date(); %>
+                           <% user.macrotracking.filter(item => {
+                               const itemDate = new Date(item.datetime);
+                               return itemDate.toDateString() === today.toDateString();
+                             }).forEach(item => { %>
+                             <h6><%= item.data[0].fat %> g</h6>
+                           <% }); %>
+                       <% }; %>
                       </div>
                     </div>
                   </div>

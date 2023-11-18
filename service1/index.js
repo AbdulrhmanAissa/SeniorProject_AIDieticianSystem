@@ -34,11 +34,6 @@ app.use(session({
 //Recipes Router
 app.get("/recipes-page", serviceController.getAllRecipes);
 
-app.get("/Dashboard", (req,res)=>{
-  user = req.session.user;
-  res.render("index",{user:user});
-});
-
 app.get("/components-modal", (req,res)=>{
   user = req.session.user;
   res.render('components-modal',{user:user});
@@ -190,12 +185,15 @@ app.get("/logout", serviceController.logout);
 app.get("/mealplan",isAuth, serviceController.mealplanner);
 app.get("/mealplanner",isAuth ,serviceController.meal_generator);
 app.get("/faq",isAuth, serviceController.faq);
+app.get("/Dashboard", isAuth, serviceController.dashboard_get);
 
 app.post("/login", serviceController.login_post);
 app.post("/register", serviceController.register_post);
 app.post("/changepass", serviceController.changepass_post);
 app.post("/editprofile", serviceController.editprofile_post);
 app.post("/Waterintake", serviceController.watertracker);
+app.post("/foodintake", serviceController.mealplanmacrotracker);
+app.post("/manualfoodintake", serviceController.manualmacrotracker)
 
 app.use((request, response) => {
     response.status(404).render('pages-error-404');

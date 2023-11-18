@@ -7,74 +7,127 @@
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
               <div class="d-flex justify-content-center py-4">
                 <a href="/Dashboard" class="logo d-flex align-items-center w-auto">
                   <img src="./assets/img/logo.png" alt="">
                   <span class="d-none d-lg-block">AI Dietician System</span>
                 </a>
               </div><!-- End Logo -->
-
-              <div class="card mb-3">
-
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Generate Your Own Meal Plan</h5>
-                    <a href="../mealplanner" class="btn w-100" style="background-color: #4154f1; color: white;" type="submit">Generate Meal Plan</a>
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">Food Intake Tracker</h5>
+                    <!-- Default Tabs -->
+                    <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
+                      <li class="nav-item flex-fill" role="presentation">
+                        <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">From Meal Plan</button>
+                      </li>
+                      <li class="nav-item flex-fill" role="presentation">
+                        <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-justified" type="button" role="tab" aria-controls="profile" aria-selected="false">Other</button>
+                      </li>
+                    </ul>
+                    <div class="tab-content pt-2" id="myTabjustifiedContent">
+                      <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
+                        <% if(user.mealplan){ %>
+                        <div class="card-body">
+                          <h5 class="card-title" style="text-align: center; min-height:158px"> <hr>What did you eat?<hr></h5>
+                              <div class="row mb-6">
+                                <div class="col-sm-12">
+                                  <form action="/foodintake" method="post">
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck1" name="Breakfast" value="Breakfast">
+                                    <label class="form-check-label" for="gridCheck1">
+                                      <p>Breakfast (<%= user.mealplan.Breakfast %>)</p>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck2" name="SnackOne" value="SnackOne">
+                                    <label class="form-check-label" for="gridCheck2">
+                                      <p>Snack One (<%= user.mealplan.SnackOne %>)</p>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck3" name="Lunch" value="Lunch">
+                                    <label class="form-check-label" for="gridCheck3">
+                                      <p>Lunch (<%= user.mealplan.Lunch %>)</p>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck4" name="SnackTwo" value="SnackTwo">
+                                    <label class="form-check-label" for="gridCheck4">
+                                      <p>Snack Two (<%= user.mealplan.SnackTwo %>)</p>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck4" name="Dinner" value="Dinner">
+                                    <label class="form-check-label" for="gridCheck4">
+                                      <p>Dinner (<%= user.mealplan.Dinner %>)</p>
+                                    </label>
+                                  </div>
+                                  <br><br>
+                                  <div class="col-12">
+                                    <button class="btn w-100" style="background-color: #4154f1; color: white;" type="submit">Submit Food Intake</button>
+                                  </div>
+                                  </form>
+                                </div>
+                              </div>
+                          </div>
+                        <% } else { %>
+                          <div class="card-body">
+                            <h5 class="card-title" style="text-align: center; min-height:158px"> <hr>Looks like you don't have a meal plan<hr></h5>
+                            <a href="/mealplanner" class="btn w-100" style="background-color: #4154f1; color: white;" type="submit">Generate Meal Plan</a>
+                          </div>
+                        <% }; %>
+                      </div>
+                      <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="pt-4 pb-2">
+                          <h5 class="card-title text-center pb-0 fs-4">Add your meal</h5>
+                          <p class="text-center small">Enter your meal details</p>
+                        </div>
+      
+                        <form method="post" action="/manualfoodintake" class="row g-3 needs-validation" novalidate>
+                          <div class="col-12">
+                            <label for="meal" class="form-label">Your Meal Name</label>
+                            <input type="text" name="meal" class="form-control" id="meal" pattern="[A-Za-z]+{3,25}" required>
+                            <div class="invalid-feedback">Please, enter your meal!</div>
+                          </div>
+      
+                          <div class="col-12">
+                            <label for="calories" class="form-label">Calories</label>
+                            <input type="number" name="calories" class="form-control" id="calories" pattern="[0-9]" required>
+                            <div class="invalid-feedback">Please enter a number</div>
+                          </div>
+      
+                          <div class="col-12">
+                            <label for="protein" class="form-label">Protein</label>
+                            <input type="number" name="protein" class="form-control" id="protein" pattern="[0-9]" required>
+                            <div class="invalid-feedback">Please enter a number</div>
+                          </div>
+      
+                          <div class="col-12">
+                            <label for="carbs" class="form-label">Carbs</label>
+                            <input type="number" name="carbs" class="form-control" id="carbs" pattern="[0-9]" required>
+                            <div class="invalid-feedback">Please enter a number</div>
+                          </div>
+      
+                          <div class="col-12">
+                            <label for="fat" class="form-label">Fat</label>
+                            <input type="number" name="fat" class="form-control" id="fat" pattern="[0-9]" required>
+                            <div class="invalid-feedback">Please enter a number</div>
+                          </div>
+      
+                          <div class="col-12">
+                            <button class="btn w-100" style="background-color: #4154f1; color: white;" type="submit">Add</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div><!-- End Default Tabs -->
+      
                   </div>
-
-                  <h5 class="card-title text-center pb-0 fs-4">Or</h5>
-
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Add your meal</h5>
-                    <p class="text-center small">Enter your meal details</p>
-                  </div>
-
-                  <form method="post" action="/register" class="row g-3 needs-validation" novalidate>
-                    <div class="col-12">
-                      <label for="meal" class="form-label">Your Meal Name</label>
-                      <input type="text" name="meal" class="form-control" id="meal" pattern="[A-Za-z]+{3,25}" required>
-                      <div class="invalid-feedback">Please, enter your meal!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="calories" class="form-label">Calories</label>
-                      <input type="number" name="calories" class="form-control" id="calories" pattern="[0-9]" required>
-                      <div class="invalid-feedback">Please enter a number</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="protein" class="form-label">Protein</label>
-                      <input type="number" name="protein" class="form-control" id="protein" pattern="[0-9]" required>
-                      <div class="invalid-feedback">Please enter a number</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="carbs" class="form-label">Carbs</label>
-                      <input type="number" name="carbs" class="form-control" id="carbs" pattern="[0-9]" required>
-                      <div class="invalid-feedback">Please enter a number</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="fat" class="form-label">Fat</label>
-                      <input type="number" name="fat" class="form-control" id="fat" pattern="[0-9]" required>
-                      <div class="invalid-feedback">Please enter a number</div>
-                    </div>
-
-                    <div class="col-12">
-                      <button class="btn w-100" style="background-color: #4154f1; color: white;" type="submit">Add</button>
-                    </div>
-           
                 </div>
-              </div>
-
-              <div class="credits">
+              <div class="credits" style="text-align: center;">
                 Designed by <a href="">AI Dietician System</a>
               </div>
-
-            </div>
           </div>
         </div>
 
