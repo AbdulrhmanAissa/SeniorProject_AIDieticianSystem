@@ -18,6 +18,7 @@
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
+      <% if(user) { %>
       
       <div class="row">
         <div class="col-8">
@@ -107,19 +108,27 @@
                   <canvas id="lineChart" style="max-height: 400px;"></canvas>
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
+                      var labels = '<%= labels %>';
+                      var caloriesdata = '<%=caloriesdata%>'
+                      var waterdata = '<%= waterdata %>'
+
+                      var labelsArray = labels.split(',');
+                      var caloriesdataArray = caloriesdata.split(',').map(Number);
+                      var waterdataArray = waterdata.split(',').map(Number);
+
                       new Chart(document.querySelector('#lineChart'), {
                         type: 'line',
                         data: {
-                          labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                          labels: labelsArray,
                           datasets: [{
                             label: 'Calories',
-                            data: [1665, 1659, 1860, 1813, 1556, 1955, 1450],
+                            data: caloriesdataArray,
                             fill: false,
                             borderColor: '#ee6666',
                             tension: 0
                           },{
                             label: 'Water',
-                            data: [1600,1356,1878,2321,1945,1978,1934],
+                            data: waterdataArray,
                             fill: false,
                             borderColor: '#5470c6',
                             tension: 0
@@ -274,6 +283,7 @@
             </div>
           </div>
       </div>
+      <% }; %>
     </section>
     
 

@@ -154,7 +154,7 @@ const login_post = async (req, res) => {
  
    req.session.isAuth = true;
    req.session.user = user;
-   res.redirect("/myprofile");
+   res.redirect("/Dashboard");
    
 };
 
@@ -243,8 +243,8 @@ const mealplanner = async (req,res)=>{
    //    res.render('mealplanner',{mealplan: user.mealplan});
    // }else{
       const bmr = floorToNearestHundred(calculateHarrisBenedictBMR(user.weight, user.height, user.age, user.gender));
-      console.log("BMR = "+bmr);
-      console.log("Total Calories = "+floorToNearestHundred(calculateHarrisBenedictTotalCalories(bmr,user.activity)));
+      // console.log("BMR = "+bmr);
+      // console.log("Total Calories = "+floorToNearestHundred(calculateHarrisBenedictTotalCalories(bmr,user.activity)));
 
       prompt = `Create a meal plan for a ${user.age} year old ${user.gender} who has 
      a weight of ${user.weight}kg and a height of ${user.height}cm and an activity level of 
@@ -270,13 +270,14 @@ const mealplanner = async (req,res)=>{
       prompt+="\n#######\n Provide the total macronutrients as a JSON object(Carbs,Proteins,Fat) in grams for each meal and snack along with the Calories (as numbers not string).\n#######\n Provide the response in JSON format with keys of Breakfast, BreakfastMacronutrients,SnackOne, SnackOneMacronutrients, Lunch, LunchMacronutrients, SnackTwo, SnackTwoMacronutrients, Dinner, DinnerMacronutrients, Proteins, Carbs, Fat, Calories."
       prompt+="\n#######\nThe response should follow this format:"
       prompt+="{Breakfast: '',BreakfastMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },SnackOne: '',SnackOneMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },Lunch: '',LunchMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },SnackTwo: '',SnackTwoMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },Dinner: '',DinnerMacronutrients: { Proteins: , Carbs: , Fat: , Calories:  },Proteins: ,Carbs: ,Fat: ,Calories: }";
-     const response = await openai.chat.completions.create({
+     
+      const response = await openai.chat.completions.create({
        model: "gpt-3.5-turbo",
        messages: [{"role": "user", "content": prompt}],
      });
 
      const ResponseDateTime = new Date();
-     console.log(ResponseDateTime);
+   //   console.log(ResponseDateTime);
 
       let newmealplan = response.choices[0].message.content;
       let newmealplan_json = JSON.parse(newmealplan);
@@ -285,7 +286,7 @@ const mealplanner = async (req,res)=>{
       newuser = await User.findOneAndUpdate({_id: user._id},{ $set:{mealplan: newmealplan_json}},{returnOriginal: false});
       req.session.user = newuser;
 
-      console.log(newmealplan_json);
+      // console.log(newmealplan_json);
       res.render('mealplanner',{ mealplan: newmealplan_json });
    // }
    } catch (error) {
@@ -300,7 +301,7 @@ const meal_generator = async (req,res) =>{
    if(user.mealplan !== undefined){
       const NewDateTime = new Date();
       const Time = NewDateTime - user.mealplan.ResponseDateTime;
-      console.log(Time);
+      // console.log(Time);
 
       if(Time > MillSecInDay){
          res.render('mealgenerator',{user: user});
@@ -348,7 +349,7 @@ function floorToNearestHundred(number) {
 const watertracker = async (req,res) => {
    user = req.session.user;
    const wateramount = req.body.wateramount;
-   console.log(wateramount);
+   // console.log(wateramount);
    const date = new Date();
    const dayOfWeek = date.getDay();
    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -360,11 +361,9 @@ const watertracker = async (req,res) => {
       if(macrotracking[i].day == dayName){
          if((date - macrotracking[i].datetime) > 86400000){
          macrotracking[i].data[0].water = parseInt(0);
-         console.log(1);
          }
          macrotracking[i].data[0].water += parseInt(wateramount);
          macrotracking[i].datetime = new Date();
-         console.log(2);
       }
    }
    newuser = await User.findByIdAndUpdate({_id: user._id},{macrotracking: macrotracking},{returnOriginal: false});
@@ -528,8 +527,14 @@ const dashboard_get = async (req,res) => {
    }
 
    req.session.user = user;
-   res.render('index',{user: user});
+
+   const labels = user.macrotracking.map(item => item.day);
+   const caloriesdata = user.macrotracking.map(item => item.data[0].calories);
+   const waterdata = user.macrotracking.map(item => item.data[0].water);
+
+   res.render('index', { user: user, labels: labels, caloriesdata: caloriesdata, waterdata: waterdata });
 }
+
 
 module.exports = { register_get, login_get, logout,
     register_post, login_post, myprofile_get,
