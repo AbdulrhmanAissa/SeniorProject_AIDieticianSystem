@@ -27,25 +27,25 @@
 
                   <form method="post" action="/register" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
-                      <label for="name" class="form-label">Your Name</label>
+                      <label for="name" class="form-label">Your Name<span class="text-danger">*</span></label>
                       <input type="text" name="name" class="form-control" id="name" pattern="[A-Za-z]+{3,25}" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="email" class="form-label">Your Email</label>
+                      <label for="email" class="form-label">Your Email<span class="text-danger">*</label>
                       <input type="email" name="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="password" class="form-label">Password</label>
+                      <label for="password" class="form-label">Password<span class="text-danger">*</label>
                       <input type="password" name="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                       <div class="invalid-feedback">Password must be 8 or more characters, at least one number, and one uppercase letter!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="gender" class="form-label">Your Gender</label>
+                      <label for="gender" class="form-label">Your Gender<span class="text-danger">*</label>
                       <select class="form-select" id="gender" name="gender" required>
                           <option value="" selected disabled>Select your gender</option>
                           <option value="Male">Male</option>
@@ -54,25 +54,25 @@
                      </div>
                   
                       <div class="col-12">
-                      <label for="age" class="form-label">Your Age</label>
+                      <label for="age" class="form-label">Your Age<span class="text-danger">*</label>
                       <input type="number" name="age" class="form-control" id="age" min="18" max="100" required>
                       <div class="invalid-feedback">Please enter your age!</div>
                     </div> 
 
                     <div class="col-12">
-                      <label for="height" class="form-label">Your Height (cm)</label>
+                      <label for="height" class="form-label">Your Height (cm)<span class="text-danger">*</label>
                       <input type="number" name="height" class="form-control" id="height" min="120" required>
                       <div class="invalid-feedback">Please enter your height!</div>
                     </div> 
 
                     <div class="col-12">
-                      <label for="weight" class="form-label">Your Weight (kg)</label>
+                      <label for="weight" class="form-label">Your Weight (kg)<span class="text-danger">*</label>
                       <input type="number" name="weight" class="form-control" id="weight" min="30" required>
                       <div class="invalid-feedback">Please enter your weight! (Must be more than 30)</div>
                     </div> 
 
                     <div class="col-12">
-                      <label for="activity" class="form-label">Activity Level</label>
+                      <label for="activity" class="form-label">Activity Level<span class="text-danger">*</label>
                       <select class="form-select" id="activity" name="activity" required>
                           <option value="" selected disabled>Select your activity level</option>
                           <option value="Sedentary">Sedentary</option>
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="col-12">
-                    <label for="healthgoal" class="form-label">Health Goal</label>
+                    <label for="healthgoal" class="form-label">Health Goal<span class="text-danger">*</label>
                     <select class="form-select" id="healthgoal" name="healthgoal" required>
                         <option value="" selected disabled>Select your health goal</option>
                         <option value="Weight Loss">Weight Loss</option>
