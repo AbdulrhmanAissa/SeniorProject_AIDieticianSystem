@@ -12,8 +12,8 @@ describe('meal_generator', () => {
       },
     };
 
-    const req = mockRequest({ session: { user } });
-    const res = mockResponse();
+    const req = request({ session: { user } });
+    const res = response();
 
     meal_generator(req, res);
 
@@ -66,7 +66,7 @@ describe('getAllRecipes', () => {
       { title: 'Recipe 1', description: 'Description 1' },
       { title: 'Recipe 2', description: 'Description 2' },
     ];
-    Recipes.find = jest.fn().mockResolvedValue(sampleRecipes);
+    Recipes.find = jest.fn().resolvedValue(sampleRecipes);
 
     const req = request();
     const res = response();
@@ -145,7 +145,7 @@ describe('mealplanner', () => {
 
   it('should handle an error response from OpenAI', async () => {
     
-    openaiCreateStub.mockRejectedValue(new Error('OpenAI API error'));
+    openaiCreateStub.rejectedValue(new Error('OpenAI API error'));
 
     const req = request({ session: { user: { _id: 'user_id' } }});
     const res = response();
@@ -160,14 +160,14 @@ describe('mealplanner', () => {
 
 //Water Tracker 
 
-const { mockRequest, mockResponse } = require('express');
+const { request, response } = require('express');
 
 const waterTrackerModule = require('./serviceController');
 
 describe('watertracker', () => {
   it('updates user macrotracking for the current day', async () => {
     // The user object and the User model
-    const mockUser = {
+    const user = {
       _id: 'user._id',
       macrotracking: [
         { day: 'Sunday', data: [{ water: 50 }], datetime: new Date() },
@@ -175,8 +175,8 @@ describe('watertracker', () => {
       ],
     };
 
-    const mockUserModel = {
-      findByIdAndUpdate: jest.fn().mockReturnValueOnce({ user: user._id }),
+    const userModel = {
+      findByIdAndUpdate: jest.fn().returnValueOnce({ user: user._id }),
     };
 
     // The request and response objects
@@ -208,7 +208,7 @@ describe('watertracker', () => {
     expect(res.redirect).toHaveBeenCalledWith('/Dashboard');
 
     // Restoring the Date object to its original implementation
-    global.Date.mockRestore();
+    global.Date.restore();
   });
 });
 
